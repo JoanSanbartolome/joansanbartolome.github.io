@@ -1,0 +1,10 @@
+# Archivos Markdown de información personal en la raíz
+/Conexiones.md
+/Experiencia laboral.md
+/Notas arquitectura web.md
+/Proyectos.md
+/Stack Tecnologico.md
+/System Prompt.md
+
+# Archivos Markdown generados a partir de documentos PDF
+/proyectos/**/*.md

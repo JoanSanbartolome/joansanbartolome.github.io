@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Cuadrícula de ingeniería de fondo sutil */
+  .grid-bg {
+    background-size: 30px 30px;
+    background-image: 
+      linear-gradient(to right, rgba(39, 39, 42, 0.25) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(39, 39, 42, 0.25) 1px, transparent 1px);
+  }
+  
+  /* Ocultar barra de desplazamiento visualmente pero mantener funcionalidad */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #09090b;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #22d3ee;
+  }
+}
+
+@layer components {
+  /* Efecto Glow en hover para las tarjetas */
+  .card-glow {
+    @apply transition-all duration-300 ease-out;
+  }
+  .card-glow:hover {
+    border-color: rgba(34, 211, 238, 0.35) !important;
+    box-shadow: 0 0 25px rgba(34, 211, 238, 0.04);
+    transform: translateY(-2px);
+  }
+}
