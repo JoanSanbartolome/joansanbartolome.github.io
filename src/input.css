@@ -3,37 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-  /* Patrón 1: Grid Técnico de Ingeniería */
-  .bg-pattern-grid {
-    background-size: 30px 30px;
-    background-image: 
-      linear-gradient(to right, rgba(39, 39, 42, 0.25) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(39, 39, 42, 0.25) 1px, transparent 1px);
-  }
-
-  /* Patrón 2: Matriz de Puntos Digitales */
-  .bg-pattern-dots {
-    background-size: 24px 24px;
-    background-image: radial-gradient(rgba(161, 161, 170, 0.2) 1.2px, transparent 1.2px);
-  }
-
-  /* Patrón 3: Líneas Scanline de Consola */
+  /* Fondo de Líneas Scanline de Ingeniería / PCB */
   .bg-pattern-scanlines {
     background-size: 100% 4px;
     background-image: linear-gradient(to bottom, rgba(39, 39, 42, 0.45) 1px, transparent 1px);
-  }
-
-  /* Patrón 4: Negro Puro Mínimo (Sin líneas) */
-  .bg-pattern-solid {
-    background-image: none !important;
-  }
-
-  /* Patrón 5: Gradiente Mesh Aurora Cyan */
-  .bg-pattern-aurora {
-    background-image: 
-      radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.12), transparent 45%),
-      radial-gradient(circle at 80% 60%, rgba(6, 182, 212, 0.08), transparent 40%),
-      radial-gradient(circle at 50% 90%, rgba(34, 211, 238, 0.06), transparent 50%);
   }
   
   /* Ocultar barra de desplazamiento visualmente manteniendo funcionalidad */
