@@ -8,3 +8,7 @@
 
 # Archivos Markdown generados a partir de documentos PDF
 /proyectos/**/*.md
+
+# Node y dependencias
+node_modules/
+.DS_Store
