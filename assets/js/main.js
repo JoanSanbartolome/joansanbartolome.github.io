@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initEmailCopier();
   initProjectFilters();
   initExperienceTabs();
+  initBgSelector();
 });
 
 /**
@@ -132,4 +133,58 @@ function initExperienceTabs() {
       });
     });
   });
+}
+
+/**
+ * Seleccionador flotante de fondo interactivo
+ */
+function initBgSelector() {
+  const bgOverlay = document.getElementById('global-bg-overlay');
+  const optionBtns = document.querySelectorAll('.bg-option-btn');
+  const togglePanelBtn = document.getElementById('toggle-bg-panel');
+  const bgPanel = document.getElementById('bg-selector-panel');
+
+  if (!bgOverlay || !optionBtns.length) return;
+
+  // Toggle abrir/cerrar panel de selección
+  if (togglePanelBtn && bgPanel) {
+    togglePanelBtn.addEventListener('click', () => {
+      bgPanel.classList.toggle('hidden');
+      bgPanel.classList.toggle('flex');
+    });
+  }
+
+  // Lista de clases de patrones
+  const bgClasses = ['bg-pattern-grid', 'bg-pattern-dots', 'bg-pattern-scanlines', 'bg-pattern-solid', 'bg-pattern-aurora'];
+
+  // Cargar fondo guardado o predeterminado
+  const savedPattern = localStorage.getItem('portfolio-bg-pattern') || 'bg-pattern-grid';
+  applyPattern(savedPattern);
+
+  optionBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pattern = btn.getAttribute('data-pattern');
+      applyPattern(pattern);
+      localStorage.setItem('portfolio-bg-pattern', pattern);
+    });
+  });
+
+  function applyPattern(pattern) {
+    // Eliminar todas las clases de fondo
+    bgClasses.forEach(cls => bgOverlay.classList.remove(cls));
+    // Aplicar la nueva
+    bgOverlay.classList.add(pattern);
+
+    // Actualizar estilo visual de los botones
+    optionBtns.forEach(b => {
+      const bPattern = b.getAttribute('data-pattern');
+      if (bPattern === pattern) {
+        b.classList.remove('bg-zinc-900', 'text-zinc-400', 'border-brand-borderDark');
+        b.classList.add('bg-cyan-500/10', 'text-brand-accent', 'border-cyan-500/50', 'font-bold');
+      } else {
+        b.classList.remove('bg-cyan-500/10', 'text-brand-accent', 'border-cyan-500/50', 'font-bold');
+        b.classList.add('bg-zinc-900', 'text-zinc-400', 'border-brand-borderDark');
+      }
+    });
+  }
 }

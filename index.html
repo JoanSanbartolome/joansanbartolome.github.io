@@ -19,8 +19,8 @@
 </head>
 <body class="bg-brand-bgDark text-zinc-300 font-sans antialiased selection:bg-cyan-500/20 selection:text-cyan-400 min-h-screen relative flex flex-col">
 
-  <!-- Fondo digital global con rejilla de ingeniería -->
-  <div class="absolute inset-0 grid-bg pointer-events-none z-0"></div>
+  <!-- Fondo digital global con seleccionador interactivo -->
+  <div id="global-bg-overlay" class="absolute inset-0 bg-pattern-grid pointer-events-none z-0 transition-all duration-500"></div>
   
   <!-- Gradiente superior de consola -->
   <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[380px] bg-gradient-to-b from-cyan-500/10 via-cyan-500/0 to-transparent pointer-events-none z-0"></div>
@@ -149,7 +149,7 @@
         <div class="h-[1px] bg-brand-borderDark flex-grow"></div>
       </div>
 
-      <!-- Rejilla de 4 Tarjetas por Categoría (Contornos Cuadrados) -->
+      <!-- Rejilla de 4 Tarjetas por Categoría -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         <!-- Tarjeta 1: Lenguajes & RTL -->
@@ -320,7 +320,7 @@
           <h2 class="text-xl font-bold tracking-wider text-zinc-100 uppercase">Proyectos Destacados</h2>
         </div>
 
-        <!-- Filtros por área técnica (Botones Cuadrados) -->
+        <!-- Filtros por área técnica -->
         <div class="flex flex-wrap gap-2 font-mono text-xs">
           <button data-filter="all" class="project-filter-btn px-3 py-1.5 bg-brand-accent text-zinc-950 border border-transparent font-bold transition-all">
             TODOS
@@ -339,10 +339,10 @@
 
       <div class="h-[1px] bg-brand-borderDark -mt-4"></div>
 
-      <!-- Tarjetas de Proyectos Reales (Cuadradas) -->
+      <!-- Tarjetas de Proyectos Reales -->
       <div class="grid grid-cols-1 gap-6">
 
-        <!-- Proyecto 1: TFG PCB Riego (Con enlace a RiuNet UPV) -->
+        <!-- Proyecto 1: TFG PCB Riego -->
         <article class="project-card bg-brand-cardDark border border-brand-borderDark p-6 md:p-8 card-glow flex flex-col justify-between gap-6" data-category="pcb embedded">
           <div class="space-y-4">
             <div class="flex items-center justify-between flex-wrap gap-2">
@@ -612,7 +612,7 @@
         <div class="h-[1px] bg-brand-borderDark flex-grow"></div>
       </div>
 
-      <!-- Pestañas de Alternancia (Cuadradas) -->
+      <!-- Pestañas de Alternancia -->
       <div class="flex items-center gap-3 font-mono text-xs">
         <button data-tab="tab-education" class="exp-tab-btn px-4 py-2 border-b-2 border-brand-accent text-brand-accent bg-cyan-500/5 font-semibold transition-all">
           01. FORMACIÓN ACADÉMICA & MÁSTERES
@@ -735,7 +735,7 @@
         </div>
       </div>
 
-      <!-- Tarjeta de Datos Adicionales (Cuadrados) -->
+      <!-- Tarjeta de Datos Adicionales -->
       <div class="bg-zinc-900/80 border border-brand-borderDark p-6 font-mono text-xs grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
         <div class="p-3 bg-zinc-950/60 border border-brand-borderDark/40">
           <span class="text-zinc-500 block text-[10px] uppercase">CARNET DE CONDUCIR</span>
@@ -762,14 +762,14 @@
         <div class="h-[1px] bg-brand-borderDark flex-grow"></div>
       </div>
 
-      <!-- Tarjeta de Contacto Profesional (Cuadrada) -->
+      <!-- Tarjeta de Contacto Profesional -->
       <div class="bg-brand-cardDark border border-brand-borderDark p-8 card-glow max-w-2xl mx-auto text-center space-y-6">
         <h3 class="text-2xl font-bold text-zinc-100">¿Tienes un reto de ingeniería?</h3>
         <p class="text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto leading-relaxed font-sans">
           Estoy disponible para incorporación laboral y colaboraciones técnicas en desarrollo de arquitectura digital RTL, prototipado FPGA, diseño de tarjetas PCB y programación de sistemas embebidos.
         </p>
 
-        <!-- Botón interactivo de email con copiado al portapapeles (Cuadrado) -->
+        <!-- Botón interactivo de email con copiado al portapapeles -->
         <div class="pt-2 flex flex-col items-center gap-4">
           <div class="relative group">
             <button id="copy-email-btn" data-email="josanbart@gmail.com" class="px-6 py-3.5 bg-zinc-900 border border-brand-borderDark hover:border-brand-accent text-zinc-200 hover:text-cyan-400 font-mono text-xs transition-all flex items-center gap-3 mx-auto shadow-md">
@@ -782,7 +782,7 @@
               </svg>
             </button>
             
-            <!-- Tooltip flotante (Cuadrado) -->
+            <!-- Tooltip flotante -->
             <div id="tooltip" class="absolute -top-10 left-1/2 -translate-x-1/2 bg-cyan-950 border border-brand-accent text-brand-accent font-mono text-[10px] px-3 py-1 shadow-lg opacity-0 pointer-events-none transition-all duration-300 transform translate-y-1">
               ¡Correo copiado al portapapeles!
             </div>
@@ -811,7 +811,7 @@
   </main>
 
   <!-- MÓDULO 6: FOOTER (Pie de página) -->
-  <footer class="border-t border-brand-borderDark bg-brand-bgDark/60 py-8 mt-16">
+  <footer class="border-t border-brand-borderDark bg-brand-bgDark/60 py-8 mt-16 pb-20">
     <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] text-zinc-500">
       <div>
         © 2026 Joan San Bartolome Ferri. Todos los derechos reservados.
@@ -821,6 +821,48 @@
       </div>
     </div>
   </footer>
+
+  <!-- WIDGET SELECCIONADOR DE FONDO FLOTANTE -->
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2 font-mono text-xs">
+    <!-- Panel Desplegable de Opciones de Fondo -->
+    <div id="bg-selector-panel" class="hidden flex-col gap-2 p-3 bg-brand-bgDark/95 border border-cyan-500/40 shadow-2xl backdrop-blur-md max-w-xs w-64 text-left">
+      <div class="flex items-center justify-between border-b border-brand-borderDark pb-2 mb-1">
+        <span class="text-[11px] font-bold text-zinc-100 uppercase tracking-wider">// SELECCIONAR FONDO</span>
+        <span class="text-[9px] text-brand-accent font-semibold">5 ESTILOS</span>
+      </div>
+      
+      <button data-pattern="bg-pattern-grid" class="bg-option-btn px-3 py-2 bg-zinc-900 border border-brand-borderDark text-zinc-400 hover:text-zinc-100 text-[11px] transition-all flex items-center justify-between">
+        <span>1. Grid Técnico</span>
+        <span class="text-[9px] text-zinc-500">Rejilla 30px</span>
+      </button>
+      
+      <button data-pattern="bg-pattern-dots" class="bg-option-btn px-3 py-2 bg-zinc-900 border border-brand-borderDark text-zinc-400 hover:text-zinc-100 text-[11px] transition-all flex items-center justify-between">
+        <span>2. Matriz de Puntos</span>
+        <span class="text-[9px] text-zinc-500">Dots Digital</span>
+      </button>
+      
+      <button data-pattern="bg-pattern-scanlines" class="bg-option-btn px-3 py-2 bg-zinc-900 border border-brand-borderDark text-zinc-400 hover:text-zinc-100 text-[11px] transition-all flex items-center justify-between">
+        <span>3. Scanlines Consola</span>
+        <span class="text-[9px] text-zinc-500">Líneas PCB</span>
+      </button>
+
+      <button data-pattern="bg-pattern-solid" class="bg-option-btn px-3 py-2 bg-zinc-900 border border-brand-borderDark text-zinc-400 hover:text-zinc-100 text-[11px] transition-all flex items-center justify-between">
+        <span>4. Negro Puro</span>
+        <span class="text-[9px] text-zinc-500">Sin líneas</span>
+      </button>
+
+      <button data-pattern="bg-pattern-aurora" class="bg-option-btn px-3 py-2 bg-zinc-900 border border-brand-borderDark text-zinc-400 hover:text-zinc-100 text-[11px] transition-all flex items-center justify-between">
+        <span>5. Aurora Cyan</span>
+        <span class="text-[9px] text-zinc-500">Glow Mesh</span>
+      </button>
+    </div>
+
+    <!-- Botón Flotante para Abrir/Cerrar el Seleccionador -->
+    <button id="toggle-bg-panel" class="px-4 py-2.5 bg-zinc-900 hover:bg-zinc-800 border border-cyan-500/50 text-brand-accent font-bold text-xs shadow-xl flex items-center gap-2 tracking-wider transition-all">
+      <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+      PROBAR FONDOS
+    </button>
+  </div>
 
 </body>
 </html>
