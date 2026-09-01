@@ -1,4 +1,5 @@
-# Archivos Markdown de información personal en la raíz
+# Archivos Markdown de información personal e instrucciones
+informacion/
 /Conexiones.md
 /Experiencia laboral.md
 /Notas arquitectura web.md
@@ -6,9 +7,20 @@
 /Stack Tecnologico.md
 /System Prompt.md
 
+# Carpetas de entorno de trabajo y editores
+.obsidian/
+.vscode/
+.idea/
+
 # Archivos Markdown generados a partir de documentos PDF
 /proyectos/**/*.md
 
-# Node y dependencias
+# Node, dependencias y zips temporales
 node_modules/
+package-lock.json
+*.zip
+*.tar.gz
 .DS_Store
+*.log
+.env
+.env.*
