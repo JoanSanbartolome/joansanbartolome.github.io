@@ -1,0 +1,258 @@
+/* ==========================================================================
+   featured.css · Proyecto destacado: placa de control STM32F746ZG
+   Entradilla, 4 highlights, pasos numerados, visor con pestañas y tecnologías.
+   Solo tokens de base.css.
+   ========================================================================== */
+
+.featured__shell {
+  box-shadow: var(--glow);
+}
+
+.featured__date {
+  margin-top: var(--space-4);
+  margin-bottom: 0;
+}
+
+/* ---------- Highlights ---------- */
+.featured__highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  list-style: none;
+}
+
+.featured__highlight {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--bg-panel-strong);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  transition: var(--t-hover);
+}
+
+/* No son enlaces: solo un realce de borde, sin elevación */
+@media (hover: hover) {
+  .featured__highlight:hover {
+    border-color: var(--accent-line);
+  }
+}
+
+.featured__highlight-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.featured__highlight-value {
+  font-size: var(--fs-base);
+  line-height: 1.3;
+}
+
+.featured__highlight-text {
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+/* ---------- Pasos numerados ---------- */
+.featured__steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+  list-style: none;
+  counter-reset: featured-step;
+}
+
+.featured__step {
+  position: relative;
+  padding: var(--space-4) var(--space-4) var(--space-4) calc(var(--space-4) + 2.4rem);
+  background: var(--bg-panel-strong);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  counter-increment: featured-step;
+}
+
+.featured__step::before {
+  content: counter(featured-step, decimal-leading-zero);
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--accent);
+}
+
+.featured__step-title {
+  font-size: var(--fs-base);
+  line-height: 1.4;
+  margin-bottom: var(--space-1);
+}
+
+.featured__step-text {
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
+/* ---------- Visor con pestañas ---------- */
+.featured__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.featured__tab {
+  min-height: var(--control-h);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  line-height: 1.3;
+  transition: var(--t-hover);
+}
+
+@media (hover: hover) {
+  .featured__tab:hover {
+    color: var(--text-main);
+    border-color: var(--accent-line);
+  }
+}
+
+.featured__tab[aria-selected="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* La lista lleva `hidden` en el HTML y featured.js se lo quita: sin JS no hay
+   pestañas. Hace falta la regla porque display: flex pisaría al atributo. */
+.featured__tabs[hidden] {
+  display: none;
+}
+
+/* Sin JS (o al imprimir) se ven todos los paneles seguidos */
+html:not(.js) .featured__panel + .featured__panel {
+  margin-top: var(--space-7);
+}
+
+@media print {
+  .featured__panel + .featured__panel {
+    margin-top: var(--space-7);
+  }
+}
+
+/* Los paneles inactivos llevan el atributo hidden (lo pone featured.js) */
+@media (prefers-reduced-motion: no-preference) {
+  .featured__panel[role="tabpanel"]:not([hidden]) {
+    animation: featured-fade var(--dur) var(--ease);
+  }
+}
+
+@keyframes featured-fade {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+  }
+
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+.featured__panel:focus-visible {
+  border-radius: var(--radius-lg);
+}
+
+.featured__figure {
+  margin: 0;
+}
+
+.featured__frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: var(--bg-base);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+}
+
+/* Fondo claro para esquemáticos y render, que tienen fondo blanco
+   (las imágenes ya traen su propio margen, así que no lleva padding) */
+.featured__frame--light {
+  background: var(--surface-paper);
+}
+
+.featured__frame img {
+  width: 100%;
+  height: auto;
+  max-height: min(540px, 70vh);
+  object-fit: contain;
+}
+
+.featured__caption {
+  margin-top: var(--space-2);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+}
+
+.featured__panel-text {
+  max-width: 78ch;
+  margin-top: var(--space-3);
+  color: var(--text-muted);
+  font-size: var(--fs-md);
+}
+
+/* ---------- Stack y enlace ---------- */
+.featured__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-soft);
+}
+
+.featured__stack {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+.featured__stack-label {
+  margin-bottom: var(--space-2);
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.featured__repo {
+  flex: none;
+}
+
+/* ---------- Responsive ---------- */
+@media (width >= 720px) {
+  .featured__shell {
+    padding: var(--space-7) var(--space-6);
+  }
+}
+
+@media (width < 480px) {
+  .featured__repo {
+    width: 100%;
+  }
+}

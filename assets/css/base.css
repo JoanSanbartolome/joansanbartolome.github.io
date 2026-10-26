@@ -1,0 +1,889 @@
+/* ==========================================================================
+   base.css · Sistema de diseño compartido
+   Tokens, reset, efectos de fondo, barra superior y componentes reutilizables.
+   Cada sección tiene su propia hoja en assets/css/sections/<seccion>.css y
+   solo debe usar estos tokens (nunca colores sueltos).
+
+   Breakpoints (solo estos tres, en sintaxis de rango y sin solapes):
+     (width < 480px)  / (width >= 480px)
+     (width < 720px)  / (width >= 720px)
+     (width < 960px)  / (width >= 960px)
+
+   Hover: todos los :hover van dentro de @media (hover: hover), para que en
+   pantallas táctiles no se queden "pegados" tras tocar.
+
+   Transiciones: los componentes usan var(--t-hover). Un elemento con
+   transición propia que además lleve .reveal declara
+     transition: <las suyas>, var(--t-reveal);
+   (si no, la suya pisaría la de .reveal y la aparición dejaría de animarse).
+   ========================================================================== */
+
+/* ---------- Tokens ---------- */
+:root {
+  color-scheme: dark;
+
+  /* Canales RGB para transparencias: rgb(var(--accent-rgb) / 0.2) */
+  --accent-rgb: 245 158 11;
+  --bg-rgb: 8 7 10;
+
+  /* Superficies */
+  --bg-base: #08070a;
+  --bg-panel: rgba(255, 255, 255, 0.035);
+  --bg-panel-strong: rgba(255, 255, 255, 0.06);
+  --border-soft: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --surface-paper: #f6efe4; /* fondo claro para imágenes/diagramas sobre "papel" */
+
+  /* Acento ámbar / cobre */
+  --accent: #f59e0b;
+  --accent-bright: #fbbf24;
+  --accent-deep: #c2410c;
+  --accent-soft: rgb(var(--accent-rgb) / 0.12);
+  --accent-line: rgb(var(--accent-rgb) / 0.35);
+  --glow: 0 0 40px rgb(var(--accent-rgb) / 0.18);
+  --glow-strong: 0 0 24px rgb(var(--accent-rgb) / 0.45);
+
+  /* Texto */
+  --text-main: #f6efe4;
+  --text-muted: #a99f90;
+  --text-dim: #948b7e; /* contraste AA sobre --bg-base */
+  --text-on-accent: #120c03;
+
+  /* Tipografía */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Code", Consolas, Menlo, monospace;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 0.95rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  --fs-3xl: clamp(2.4rem, 1.4rem + 4vw, 4rem);
+  --tracking-wide: 0.14em;
+
+  /* Espaciado y forma */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 5rem;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --container: 1120px;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --topbar-h: 68px;
+  --control-h: 40px;
+
+  /* Capas (z-index) */
+  --z-bg: -2;
+  --z-glow: -1;
+  --z-base: 1;
+  --z-topbar: 50;
+  --z-progress: 100;
+  --z-skip: 200;
+
+  /* Movimiento */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 0.2s;
+  --dur: 0.45s;
+  --dur-reveal: 0.7s;
+  --t-hover:
+    border-color var(--dur-fast) ease,
+    box-shadow var(--dur-fast) ease,
+    transform var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) ease,
+    color var(--dur-fast) ease;
+}
+
+/* --t-reveal se declara también en .reveal: una custom property resuelve sus
+   var() en el elemento donde se declara, así que solo así cada elemento
+   recoge su propio --reveal-delay (escalonado). */
+:root,
+.reveal {
+  --t-reveal:
+    opacity var(--dur-reveal) var(--ease) var(--reveal-delay, 0s),
+    translate var(--dur-reveal) var(--ease) var(--reveal-delay, 0s);
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--topbar-h) + var(--space-4));
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 1.65;
+  color: var(--text-main);
+  background: var(--bg-base);
+  /* clip (no hidden): no crea contenedor de scroll, así position: sticky sigue funcionando */
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent-bright);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Utilidades ---------- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: var(--z-skip);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--text-on-accent);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.accent {
+  color: var(--accent);
+}
+
+/* ---------- Efectos de fondo ---------- */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(var(--accent-rgb) / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--accent-rgb) / 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 40%, transparent 100%);
+}
+
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-glow);
+  width: 420px;
+  height: 420px;
+  margin: -210px 0 0 -210px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(var(--accent-rgb) / 0.13), transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: transform;
+}
+
+.cursor-glow.is-active {
+  opacity: 1;
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-progress);
+  width: 100%;
+  height: 3px;
+  pointer-events: none;
+}
+
+.scroll-progress__bar {
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent), var(--accent-bright));
+  box-shadow: 0 0 10px var(--accent);
+}
+
+/* ---------- Barra superior ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-topbar);
+  height: var(--topbar-h);
+  background: rgb(var(--bg-rgb) / 0.72);
+  /* Ojo: backdrop-filter convierte el topbar en el bloque contenedor de sus
+     descendientes position: fixed. La .nav móvil se posiciona respecto al
+     topbar, no a la ventana (top: var(--topbar-h) = justo debajo de él). */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.topbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  height: 100%;
+}
+
+.logo {
+  flex: none;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+}
+
+.logo__accent {
+  color: var(--accent);
+}
+
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  list-style: none;
+}
+
+.nav__link {
+  position: relative;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--dur-fast) ease;
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.nav__link.is-active,
+.nav__link[aria-current="location"] {
+  color: var(--text-main);
+}
+
+.nav__link.is-active::after,
+.nav__link[aria-current="location"]::after {
+  transform: scaleX(1);
+}
+
+@media (hover: hover) {
+  .nav__link:hover {
+    color: var(--text-main);
+  }
+}
+
+.topbar__actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+}
+
+.lang-toggle__btn {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+.lang-toggle__btn[aria-pressed="true"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+@media (hover: hover) {
+  .lang-toggle__btn:hover {
+    color: var(--text-main);
+  }
+}
+
+.menu-btn {
+  display: none;
+  width: var(--control-h);
+  height: var(--control-h);
+  place-items: center;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+}
+
+.menu-btn__bars,
+.menu-btn__bars::before,
+.menu-btn__bars::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: transform var(--dur-fast) var(--ease), opacity var(--dur-fast) ease;
+}
+
+.menu-btn__bars {
+  position: relative;
+}
+
+.menu-btn__bars::before,
+.menu-btn__bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.menu-btn__bars::before {
+  top: -6px;
+}
+
+.menu-btn__bars::after {
+  top: 6px;
+}
+
+.menu-btn[aria-expanded="true"] .menu-btn__bars {
+  background: transparent;
+}
+
+.menu-btn[aria-expanded="true"] .menu-btn__bars::before {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menu-btn[aria-expanded="true"] .menu-btn__bars::after {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+@media (width < 960px) {
+  .menu-btn {
+    display: grid;
+  }
+
+  /* Panel desplegable (fixed respecto al topbar, ver nota en .topbar) */
+  .nav {
+    position: fixed;
+    top: var(--topbar-h);
+    left: 0;
+    right: 0;
+    padding: var(--space-4) var(--gutter) var(--space-5);
+    background: rgb(var(--bg-rgb) / 0.97);
+    border-bottom: 1px solid var(--border-soft);
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--dur-fast) ease, transform var(--dur-fast) var(--ease), visibility 0s linear var(--dur-fast);
+  }
+
+  .nav.is-open {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .nav__link {
+    font-size: var(--fs-base);
+  }
+}
+
+/* ---------- Sin JavaScript (html:not(.js); boot.js pone .js) ---------- */
+html:not(.js) .lang-toggle,
+html:not(.js) .menu-btn {
+  display: none;
+}
+
+@media (width < 960px) {
+  /* Sin JS no hay botón de menú: la navegación es una fila con scroll horizontal dentro del topbar */
+  html:not(.js) .nav {
+    position: static;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  html:not(.js) .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  html:not(.js) .nav__list {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-4);
+    padding-block: var(--space-2);
+    white-space: nowrap;
+  }
+
+  html:not(.js) .nav__link {
+    font-size: var(--fs-sm);
+  }
+}
+
+/* Idioma pendiente: boot.js pone .i18n-pending si el idioma guardado no es el
+   del HTML; main.js la quita al aplicar el idioma. La animación es una red de
+   seguridad: si main.js no llegara a ejecutarse, el contenido se muestra igual. */
+.i18n-pending main {
+  visibility: hidden;
+  animation: i18n-pending-fallback 0s linear 3s forwards;
+}
+
+@keyframes i18n-pending-fallback {
+  to {
+    visibility: visible;
+  }
+}
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--space-8);
+}
+
+.section-head {
+  margin-bottom: var(--space-6);
+}
+
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-2);
+}
+
+.section-title {
+  font-size: var(--fs-2xl);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.section-lead {
+  max-width: 68ch;
+  margin-top: var(--space-3);
+  color: var(--text-muted);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+@media (720px <= width < 960px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width < 720px) {
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .section {
+    padding-block: var(--space-7);
+  }
+}
+
+/* ---------- Componentes ---------- */
+.card {
+  position: relative;
+  padding: var(--space-5);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  transition: var(--t-hover);
+}
+
+.card.reveal {
+  transition: var(--t-hover), var(--t-reveal);
+}
+
+@media (hover: hover) {
+  .card--interactive:hover {
+    border-color: var(--accent-line);
+    box-shadow: var(--glow);
+    transform: translateY(-3px);
+  }
+}
+
+.card__title {
+  font-size: var(--fs-lg);
+  line-height: 1.35;
+  margin-bottom: var(--space-2);
+}
+
+.card__text {
+  color: var(--text-muted);
+  font-size: var(--fs-md);
+}
+
+/* Panel: bloque de contenido sin interacción (más aire que .card) */
+.panel {
+  padding: var(--space-6) var(--space-5);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+}
+
+@media (width < 720px) {
+  .panel {
+    padding: var(--space-5) var(--space-4);
+  }
+}
+
+/* Caja de icono: un svg centrado sobre fondo de acento */
+.icon-box {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.icon-box svg {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-box--lg {
+  width: 44px;
+  height: 44px;
+}
+
+/* Antetítulo pequeño en mayúsculas */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-muted);
+}
+
+/* Píldora de acento (fechas, estados, etiquetas destacadas) */
+.pill,
+.date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 3px 12px;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+}
+
+/* .date-badge = .pill + margen inferior (se mantiene por compatibilidad) */
+.date-badge {
+  margin-bottom: var(--space-3);
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.chip {
+  display: inline-block;
+  max-width: 100%;
+  padding: 4px 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-pill);
+  background: var(--bg-panel-strong);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  /* Los chips largos parten línea en vez de desbordar a 360 px */
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.chip--accent {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 46px;
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: var(--fs-md);
+  text-decoration: none;
+  transition: var(--t-hover);
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+  color: var(--text-on-accent);
+  box-shadow: var(--glow-strong);
+}
+
+.btn--ghost {
+  border: 1px solid var(--border-strong);
+  background: var(--bg-panel);
+  color: var(--text-main);
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  text-decoration: none;
+}
+
+@media (hover: hover) {
+  .btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 34px rgb(var(--accent-rgb) / 0.6);
+  }
+
+  .btn--ghost:hover {
+    border-color: var(--accent-line);
+    transform: translateY(-2px);
+  }
+
+  .link-arrow:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+/* ---------- Animación de aparición ----------
+   Usa la propiedad independiente `translate` (no `transform`), así nunca
+   compite con el transform de los :hover. Escalonado: --reveal-delay en el
+   propio elemento (p. ej. style="--reveal-delay: 0.1s"). */
+.reveal {
+  opacity: 0;
+  translate: 0 24px;
+  transition: var(--t-reveal);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  translate: none;
+}
+
+/* Sin JavaScript, todo visible */
+html:not(.js) .reveal {
+  opacity: 1;
+  translate: none;
+}
+
+/* ---------- Pie ---------- */
+.footer {
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--border-soft);
+  color: var(--text-dim);
+  font-size: var(--fs-sm);
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    translate: none;
+  }
+
+  .cursor-glow {
+    display: none;
+  }
+}
+
+/* ---------- Impresión ---------- */
+@media print {
+  /* Excepción a la regla de tokens: en papel, fondo blanco y texto negro */
+  :root {
+    --bg-base: #fff;
+    --bg-panel: transparent;
+    --bg-panel-strong: transparent;
+    --border-soft: #ccc;
+    --border-strong: #999;
+    --text-main: #000;
+    --text-muted: #222;
+    --text-dim: #444;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .topbar,
+  .skip-link,
+  .scroll-progress,
+  .bg-grid,
+  .cursor-glow,
+  .hero__bg3d,
+  [role="tablist"],
+  [data-contact-copy],
+  .contact__copy {
+    display: none !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    translate: none !important;
+  }
+
+  /* Todas las pestañas visibles, una tras otra */
+  [role="tabpanel"],
+  [role="tabpanel"][hidden] {
+    display: block !important;
+  }
+
+  .card,
+  .panel {
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
+}

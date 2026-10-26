@@ -1,0 +1,200 @@
+/* ==========================================================================
+   contact.css · Sección "Contacto"
+   Cabecera centrada + lista de filas (icono, rótulo y dato) + botón de CV.
+   Componentes de base.css: .icon-box--lg (icono), .eyebrow (rótulo), .btn.
+   ========================================================================== */
+
+.contact__inner {
+  max-width: 760px;
+}
+
+.contact__head {
+  text-align: center;
+}
+
+.contact__head .section-lead {
+  margin-inline: auto;
+}
+
+/* ---------- Lista de filas ---------- */
+.contact__list {
+  /* Tamaño de la caja de icono (igual que .icon-box--lg); lo usa el
+     sangrado del botón Copiar en móvil. */
+  --contact-icon: 44px;
+  display: grid;
+  gap: var(--space-3);
+  list-style: none;
+}
+
+.contact__item {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-2);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  /* Las de hover + las de .reveal (si no, se perdería el fundido) */
+  transition: var(--t-hover), var(--t-reveal);
+}
+
+/* Aparición escalonada */
+.contact__item:nth-child(2) { --reveal-delay: 0.06s; }
+.contact__item:nth-child(3) { --reveal-delay: 0.12s; }
+.contact__item:nth-child(4) { --reveal-delay: 0.18s; }
+.contact__actions { --reveal-delay: 0.24s; }
+
+.contact__item:focus-within {
+  border-color: var(--accent-line);
+  box-shadow: var(--glow);
+}
+
+.contact__link {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+}
+
+.contact__icon {
+  width: var(--contact-icon);
+  height: var(--contact-icon);
+  transition: var(--t-hover);
+}
+
+.contact__link:focus-visible .contact__icon {
+  color: var(--accent-bright);
+  box-shadow: var(--glow-strong);
+}
+
+.contact__body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.contact__value {
+  color: var(--text-main);
+  font-weight: 500;
+  /* Las URL largas (LinkedIn) parten línea en vez de desbordar a 360 px */
+  overflow-wrap: anywhere;
+  transition: var(--t-hover);
+}
+
+.contact__arrow {
+  flex: none;
+  margin-left: auto;
+  color: var(--text-dim);
+  transition: var(--t-hover);
+}
+
+.contact__link:focus-visible .contact__arrow {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+
+/* ---------- Botón Copiar ---------- */
+.contact__copy {
+  flex: none;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-h);
+  margin-right: var(--space-4);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--bg-panel-strong);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  white-space: nowrap;
+  transition: var(--t-hover);
+}
+
+.contact__copy.is-copied {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+
+.contact__copy-icon {
+  flex: none;
+}
+
+/* ---------- Realce al pasar el ratón (las filas son enlaces) ---------- */
+@media (hover: hover) {
+  .contact__item:hover {
+    border-color: var(--accent-line);
+    box-shadow: var(--glow);
+  }
+
+  .contact__item:hover .contact__icon {
+    color: var(--accent-bright);
+    box-shadow: var(--glow-strong);
+  }
+
+  .contact__link:hover .contact__value {
+    color: var(--accent-bright);
+  }
+
+  .contact__link:hover .contact__arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+
+  .contact__copy:hover {
+    color: var(--accent);
+    border-color: var(--accent-line);
+  }
+}
+
+/* ---------- Acciones (CV) ---------- */
+.contact__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.contact__cv-meta {
+  color: var(--text-dim);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ---------- Móvil ---------- */
+@media (width < 480px) {
+  .contact__item--email {
+    flex-wrap: wrap;
+  }
+
+  .contact__item--email .contact__link {
+    flex-basis: 100%;
+    padding-bottom: var(--space-2);
+  }
+
+  /* Alineado con el texto: padding de la fila + icono + hueco */
+  .contact__copy {
+    margin: 0 var(--space-4) var(--space-4) calc(var(--space-4) + var(--contact-icon) + var(--space-3));
+  }
+
+  .contact__link {
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .contact__value {
+    font-size: var(--fs-sm);
+  }
+
+  .contact__cv {
+    width: 100%;
+  }
+}

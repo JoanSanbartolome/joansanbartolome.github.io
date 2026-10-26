@@ -1,0 +1,154 @@
+/* ==========================================================================
+   journey.css · Sección "Mi trayectoria" (#journey)
+   Línea temporal vertical con nodos circulares. El contenedor es .panel y la
+   etiqueta «En curso» es .pill (ambos en base.css).
+   ========================================================================== */
+
+/* ---------- Línea ---------- */
+.journey__list {
+  --journey-node: 14px;
+  --journey-gap: var(--space-5);
+
+  position: relative;
+  list-style: none;
+  padding-left: calc(var(--journey-node) + var(--journey-gap));
+}
+
+.journey__list::before {
+  content: "";
+  position: absolute;
+  top: var(--space-2);
+  bottom: var(--space-2);
+  left: calc(var(--journey-node) / 2 - 1px);
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--accent-line), var(--border-soft) 85%);
+}
+
+/* ---------- Hitos ---------- */
+.journey__item {
+  position: relative;
+  min-width: 0;
+}
+
+.journey__item + .journey__item {
+  margin-top: var(--space-6);
+}
+
+/* Nodo (pseudoelemento: su transición no pisa la de .reveal del <li>) */
+.journey__item::before {
+  content: "";
+  position: absolute;
+  top: 0.3rem;
+  left: calc(-1 * (var(--journey-node) + var(--journey-gap)));
+  width: var(--journey-node);
+  height: var(--journey-node);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--bg-base);
+  box-shadow: 0 0 12px var(--accent-line);
+  transition: var(--t-hover);
+}
+
+@media (hover: hover) {
+  .journey__item:hover::before {
+    background: var(--accent-soft);
+    box-shadow: var(--glow-strong);
+  }
+}
+
+/* Hito actual: nodo relleno y más brillante */
+.journey__item--current::before {
+  border-color: var(--accent-bright);
+  background: var(--accent-bright);
+  box-shadow: 0 0 0 4px var(--accent-soft), var(--glow-strong);
+}
+
+/* Onda que se expande dos veces al aparecer y luego queda oculta
+   (finita: WCAG 2.2.2). Sin JS se reproduce al cargar. */
+.journey__item--current::after {
+  content: "";
+  position: absolute;
+  top: 0.3rem;
+  left: calc(-1 * (var(--journey-node) + var(--journey-gap)));
+  width: var(--journey-node);
+  height: var(--journey-node);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.journey__item--current.is-visible::after,
+html:not(.js) .journey__item--current::after {
+  animation: journey-pulse 2.4s var(--ease) 2 forwards;
+}
+
+@keyframes journey-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+/* ---------- Texto ---------- */
+.journey__date {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+
+.journey__title {
+  margin-top: var(--space-1);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.journey__org {
+  margin-top: var(--space-1);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.journey__text {
+  max-width: 68ch;
+  margin-top: var(--space-2);
+  font-size: var(--fs-md);
+  color: var(--text-muted);
+}
+
+.journey__note {
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--accent);
+}
+
+/* ---------- Móvil ---------- */
+@media (width < 720px) {
+  .journey__list {
+    --journey-node: 12px;
+    --journey-gap: var(--space-4);
+  }
+
+  .journey__item + .journey__item {
+    margin-top: var(--space-5);
+  }
+
+  .journey__title {
+    font-size: var(--fs-base);
+  }
+}

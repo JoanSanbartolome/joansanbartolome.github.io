@@ -16,9 +16,12 @@ gemini.md
 # Archivos Markdown generados a partir de documentos PDF
 /proyectos/**/*.md
 
-# Node, dependencias y zips temporales
+# Python (scripts de tools/)
+__pycache__/
+*.pyc
+
+# Dependencias, temporales y secretos
 node_modules/
-package-lock.json
 *.zip
 *.tar.gz
 .DS_Store

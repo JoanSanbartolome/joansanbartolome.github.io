@@ -1,0 +1,294 @@
+/* ==========================================================================
+   projects.css · "Otros proyectos de ingeniería"
+   Rejilla de tarjetas con medio visual arriba (imagen o esquema SVG),
+   fecha, título, descripción, tecnologías y enlace al repositorio.
+   Rejilla: 1 columna (< 720), 2 columnas (720–959), 3 columnas (≥ 960).
+   La tarjeta de la FIFO ocupa 2 columnas desde 720 y se maqueta en horizontal.
+   Las tarjetas no son enlaces: sin efectos de "clicable", solo realce de borde.
+   ========================================================================== */
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+}
+
+@media (720px <= width < 960px) {
+  .projects__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 960px) {
+  .projects__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Tarjeta ---------- */
+.projects__card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Aparición escalonada (sin atributos style: la CSP no permite estilos en línea) */
+.projects__card:nth-child(3n + 2) {
+  --reveal-delay: 0.08s;
+}
+
+.projects__card:nth-child(3n) {
+  --reveal-delay: 0.16s;
+}
+
+@media (hover: hover) {
+  .projects__card:hover {
+    border-color: var(--border-strong);
+  }
+}
+
+.projects__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-5);
+}
+
+.projects__body .card__text strong {
+  color: var(--accent-bright);
+  font-weight: 600;
+}
+
+.projects__chips {
+  margin-top: auto;
+  padding-top: var(--space-4);
+}
+
+.projects__link {
+  margin-top: var(--space-3);
+}
+
+/* ---------- Medio visual ---------- */
+.projects__media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--bg-panel-strong);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.projects__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Gráfico sobre fondo blanco: se enmarca en "papel" en vez de atenuarlo con filtro.
+   multiply funde el blanco de la imagen con el tono del papel. */
+.projects__media--paper {
+  padding: var(--space-2);
+  background: var(--surface-paper);
+}
+
+.projects__media--paper img {
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+/* Fotograma de pantalla (fondo negro) */
+.projects__media--screen {
+  background: var(--bg-base);
+}
+
+/* Esquemas SVG */
+.projects__media--diagram {
+  display: grid;
+  place-items: center;
+  padding: var(--space-2);
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 40%, var(--accent-soft), transparent 70%),
+    var(--bg-panel);
+}
+
+.projects__svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* FIFO: esquema del banco de pruebas + comparación de cobertura */
+.projects__media--fifo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-4);
+  aspect-ratio: auto;
+  padding: var(--space-4) var(--space-3);
+}
+
+.projects__media--fifo .projects__svg {
+  height: auto;
+}
+
+.projects__cov {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  background: var(--bg-panel);
+}
+
+.projects__cov-title {
+  margin-bottom: var(--space-2);
+}
+
+.projects__cov-list {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.projects__cov-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-3);
+  font-size: var(--fs-xs);
+}
+
+.projects__cov-name {
+  color: var(--text-muted);
+}
+
+.projects__cov-value {
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+.projects__cov-track {
+  grid-column: 1 / -1;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-panel-strong);
+  overflow: hidden;
+}
+
+.projects__cov-bar {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--text-dim);
+}
+
+/* Longitud proporcional a los ciclos simulados (2.550 de 10.000) */
+.projects__cov-bar--driven {
+  width: 25.5%;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent-bright));
+  box-shadow: var(--glow-strong);
+}
+
+.projects__cov-bar--fixed {
+  width: 100%;
+}
+
+/* ---------- Tarjeta ancha (FIFO) ---------- */
+@media (width >= 720px) {
+  .projects__card--wide {
+    display: grid;
+    grid-column: span 2;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .projects__card--wide .projects__media {
+    aspect-ratio: auto;
+    min-height: 100%;
+    border-bottom: 0;
+    border-right: 1px solid var(--border-soft);
+  }
+}
+
+/* ---------- Elementos de los esquemas SVG (tamaños en unidades del viewBox) ---------- */
+.projects__svg-box {
+  fill: var(--bg-panel-strong);
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+
+.projects__svg-box--accent {
+  fill: var(--accent-soft);
+  stroke: var(--accent-line);
+}
+
+.projects__svg-frame {
+  fill: none;
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+}
+
+.projects__svg-slot {
+  fill: none;
+  stroke: var(--accent-line);
+  stroke-width: 1.5;
+}
+
+.projects__svg-slot--full {
+  fill: var(--accent-line);
+  stroke: var(--accent);
+}
+
+.projects__svg-slot--more {
+  stroke-dasharray: 4 3;
+}
+
+.projects__svg-bus {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.projects__svg-wire {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.projects__svg-wire--dashed {
+  stroke-dasharray: 5 4;
+}
+
+.projects__svg-head {
+  fill: var(--accent);
+}
+
+.projects__svg-title,
+.projects__svg-label,
+.projects__svg-sub {
+  font-family: var(--font-mono);
+}
+
+.projects__svg-title {
+  fill: var(--accent-bright);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.projects__svg-label {
+  fill: var(--text-main);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.projects__svg-label--accent {
+  fill: var(--accent-bright);
+}
+
+.projects__svg-sub {
+  fill: var(--text-muted);
+  font-size: 13px;
+}
+
+.projects__svg-sub--accent {
+  fill: var(--accent);
+}

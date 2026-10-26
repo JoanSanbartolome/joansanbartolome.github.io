@@ -1,0 +1,171 @@
+# ==========================================
+# Configuración Apache 2.4 · joansanbartolome.es (Hostinger)
+# Sitio estático: index.html + assets/. Sin PHP ni backend.
+# ==========================================
+
+# ==========================================
+# 0. Opciones generales
+# ==========================================
+# Página de inicio y sin listado de directorios
+DirectoryIndex index.html
+Options -Indexes
+
+# Página de error personalizada
+ErrorDocument 404 /404.html
+
+# Tipos MIME y codificación que no todos los servidores traen por defecto
+<IfModule mod_mime.c>
+    AddType image/svg+xml                svg svgz
+    AddType image/webp                   webp
+    AddType image/x-icon                 ico
+    AddType font/woff2                   woff2
+    AddType font/woff                    woff
+    AddType application/manifest+json    webmanifest
+    AddType text/javascript              js mjs
+    AddCharset utf-8 .html .css .js .mjs .json .xml .txt .svg .webmanifest
+</IfModule>
+
+# ==========================================
+# 1. Redirecciones: HTTPS, sin www y URL canónica
+# ==========================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # www.joansanbartolome.es -> https://joansanbartolome.es (una sola redirección)
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+    # Forzar HTTPS (SSL)
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # /index.html -> / (evita contenido duplicado; la canónica es "/")
+    RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+    RewriteRule ^index\.html$ / [L,R=301]
+</IfModule>
+
+# ==========================================
+# 2. Bloquear archivos que no deben publicarse
+#    (por si se sube el repositorio entero al servidor)
+#    Se responde 404 para no revelar que existen.
+# ==========================================
+<IfModule mod_alias.c>
+    # Archivos y carpetas ocultos (.git, .claude, .agents, .fragments, .obsidian,
+    # .gitignore, .htaccess, .env...), salvo /.well-known/ (certificados SSL)
+    RedirectMatch 404 "/\.(?!well-known(/|$))"
+
+    # Carpetas de trabajo que no forman parte de la web
+    # (solo en la raíz: assets/docs/ con los CV sí es pública)
+    RedirectMatch 404 "^/(docs|tools|informacion|node_modules)(/|$)"
+
+    # Documentación, scripts y configuración por extensión
+    RedirectMatch 404 "(?i)\.(md|py|pyc|sh|ps1|log|bak|env|zip|tar|gz|lock)$"
+
+    # Archivos JSON de configuración concretos
+    RedirectMatch 404 "(?i)/(skills-lock|launch|package|package-lock|tsconfig|composer)\.json$"
+</IfModule>
+
+# ==========================================
+# 3. Compresión de recursos (Deflate)
+# ==========================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+    AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript
+    AddOutputFilterByType DEFLATE application/json application/ld+json application/manifest+json
+    AddOutputFilterByType DEFLATE application/xml application/rss+xml
+    AddOutputFilterByType DEFLATE image/svg+xml image/x-icon
+    AddOutputFilterByType DEFLATE font/ttf font/otf application/vnd.ms-fontobject
+</IfModule>
+
+# ==========================================
+# 4. Caché del navegador
+#    - HTML: no-cache (se revalida en cada visita; los cambios se ven al instante).
+#    - CSS/JS: también no-cache. Sus nombres no llevan versión ni hash, así que si se
+#      cachearan días, un HTML nuevo podría combinarse con CSS/JS antiguos y romper la
+#      página. Con no-cache el navegador guarda la copia pero pregunta antes de usarla
+#      (ETag / Last-Modified): si no cambió, el servidor responde 304 sin cuerpo.
+#    - Imágenes, fuentes y PDF: 1 mes (cambian poco y un desfase no rompe nada).
+# ==========================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # HTML (sin caché prolongada para permitir actualizaciones inmediatas)
+    ExpiresByType text/html "access plus 0 seconds"
+
+    # CSS y JS (revalidación siempre; ver explicación arriba)
+    ExpiresByType text/css "access plus 0 seconds"
+    ExpiresByType text/javascript "access plus 0 seconds"
+    ExpiresByType application/javascript "access plus 0 seconds"
+
+    # Imágenes (1 mes)
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 month"
+
+    # Fuentes (1 mes)
+    ExpiresByType font/woff2 "access plus 1 month"
+    ExpiresByType font/woff "access plus 1 month"
+    ExpiresByType font/ttf "access plus 1 month"
+
+    # Documentos PDF (CV) (1 mes)
+    ExpiresByType application/pdf "access plus 1 month"
+
+    # robots.txt y sitemap.xml (1 día)
+    ExpiresByType text/plain "access plus 1 day"
+    ExpiresByType application/xml "access plus 1 day"
+    ExpiresByType text/xml "access plus 1 day"
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Cache-Control explícito (manda sobre el que genera mod_expires)
+    <FilesMatch "\.html?$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+    <FilesMatch "\.(css|js|mjs)$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+    <FilesMatch "\.(png|jpe?g|webp|gif|svg|ico|woff2?|ttf|pdf)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+</IfModule>
+
+# ==========================================
+# 5. Cabeceras de seguridad HTTP
+# ==========================================
+<IfModule mod_headers.c>
+    # Impide que el navegador "adivine" el tipo MIME
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Solo se envía el origen al salir hacia otros sitios
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Nadie ajeno puede incrustar la web en un iframe (equivale a frame-ancestors 'self')
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Desactiva APIs del navegador que la web no usa
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+
+    # Política de contenido: solo recursos propios + Google Fonts + el módulo de Three.js.
+    # - script-src autoriza SOLO ese archivo de jsDelivr (no todo el CDN). Debe coincidir
+    #   exactamente con THREE_URL de assets/js/chip3d.js: si se cambia la versión, cambiar ambos.
+    #   three.module.js no importa otros archivos, así que basta con esa URL.
+    # - connect-src 'self': el import() de un módulo se rige por script-src, no por connect-src.
+    # Sin 'unsafe-inline': nada de <script> ni <style> en línea ni atributos style="" en el HTML.
+    # (El JSON-LD application/ld+json no se ejecuta y no le afecta.)
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'"
+
+    # X-XSS-Protection está obsoleta (y puede abrir fallos en navegadores antiguos): se elimina
+    Header always unset X-XSS-Protection
+    Header unset X-XSS-Protection
+
+    # No revelar tecnología del servidor
+    Header always unset X-Powered-By
+    Header unset X-Powered-By
+
+    # HSTS (opcional). Actívalo solo cuando HTTPS funcione bien en el dominio y, si añades
+    # includeSubDomains, también en todos los subdominios. Es difícil de deshacer.
+    # Header always set Strict-Transport-Security "max-age=31536000" "expr=%{HTTPS} == 'on'"
+</IfModule>

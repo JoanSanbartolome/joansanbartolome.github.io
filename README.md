@@ -1,22 +1,34 @@
-# Portafolio Profesional - Joan San Bartolome Ferri
+# Portafolio · Joan San Bartolomé Ferri
 
-> **Ingeniero Electrónico Industrial & Desarrollador RTL / FPGA / Sistemas Embebidos**  
-> Máster Universitario en Ingeniería de Sistemas Electrónicos | Máster en IA Aplicada
+> Ingeniero de Diseño y Verificación Digital · RTL (SystemVerilog) · FPGA · PCB
+> Máster Universitario en Ingeniería de Sistemas Electrónicos (UPV)
 
-Sitio web profesional e interactivo. Presenta proyectos reales de diseño digital RTL, prototipado de PCBs, aceleración de algoritmos en FPGAs y desarrollo embebido.
+Web personal publicada en **https://joansanbartolome.es**. Página única, bilingüe (ES/EN), hecha con HTML, CSS y JavaScript sin frameworks ni paso de compilación.
 
----
+## Secciones
 
-## 🛠️ Stack Técnico
+Hero (con fondo 3D de un chip en Three.js) · Sobre mí · Trayectoria · Experiencia · Proyecto destacado (placa STM32F746ZG) · Otros proyectos · Habilidades · Contacto.
 
-- **Descripción RTL & Síntesis:** SystemVerilog, Verilog, MATLAB / Simulink, HLS.
-- **Hardware & FPGAs:** Intel Cyclone IV / V, Gowin Tang Nano 9k, STM32, ESP32, Raspberry Pi.
-- **Entornos EDA & CAD:** ModelSim / QuestaSim, Intel Quartus Prime, Altium Designer, KiCad, Cadence Virtuoso.
+## Probar en local
 
----
+```bash
+python -m http.server 5500
+```
 
-## 📬 Contacto
+Abre http://localhost:5500.
 
-- **Email:** [josanbart@gmail.com](mailto:josanbart@gmail.com)
-- **LinkedIn:** [Joan San Bartolome Ferri](https://www.linkedin.com/in/joan-san-bartolome-ferri-358818252/)
-- **GitHub:** [@JoanSanbartolome](https://github.com/JoanSanbartolome)
+## Mantenimiento
+
+- Estructura, reglas de estilo, sistema de idiomas y cómo añadir un proyecto: [docs/CONVENCIONES.md](docs/CONVENCIONES.md).
+- Los datos salen del CV v3 y del perfil de `ruta_al_silicio`. No se publica nada que no esté verificado allí.
+- Imágenes: `python tools/optimize_image.py origen.png assets/img/projects/nombre.webp`.
+
+## Publicación (Hostinger)
+
+Sube a `public_html` el contenido del repositorio. Basta con `index.html`, `404.html`, `.htaccess`, `robots.txt`, `sitemap.xml` y la carpeta `assets/`. El `.htaccess` fuerza HTTPS, define la caché y las cabeceras de seguridad, y bloquea el acceso a `docs/`, `tools/` y los archivos de configuración si se suben por error.
+
+## Contacto
+
+- Email: [josanbart@gmail.com](mailto:josanbart@gmail.com)
+- LinkedIn: [Joan San Bartolomé Ferri](https://www.linkedin.com/in/joan-san-bartolome-ferri-358818252)
+- GitHub: [@JoanSanbartolome](https://github.com/JoanSanbartolome)

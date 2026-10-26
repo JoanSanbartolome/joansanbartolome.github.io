@@ -1,0 +1,156 @@
+/* ==========================================================================
+   about.css · Sección "Sobre mí" (#about)
+   Texto en primera persona + tarjeta de datos rápidos. Solo tokens de base.css.
+   ========================================================================== */
+
+.about__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* ---------- Texto ---------- */
+.about__text {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 68ch;
+}
+
+.about__para {
+  position: relative;
+  padding-left: var(--space-4);
+  color: var(--text-muted);
+  font-size: var(--fs-base);
+  line-height: 1.75;
+}
+
+/* Línea de acento a la izquierda de cada párrafo */
+.about__para::before {
+  content: "";
+  position: absolute;
+  top: 0.45em;
+  bottom: 0.45em;
+  left: 0;
+  width: 2px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(180deg, var(--accent), var(--accent-line), transparent);
+}
+
+.about__para strong {
+  color: var(--text-main);
+}
+
+/* ---------- Tarjeta de datos rápidos ---------- */
+.about__facts {
+  overflow: hidden;
+  border-color: var(--accent-line);
+  background: linear-gradient(160deg, var(--accent-soft), var(--bg-panel) 55%);
+  box-shadow: var(--glow);
+}
+
+.about__facts::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--space-5);
+  right: var(--space-5);
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent), var(--accent-bright));
+}
+
+.about__facts-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.about__facts-title::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: var(--glow-strong);
+}
+
+.about__list {
+  display: grid;
+}
+
+.about__row {
+  display: grid;
+  gap: var(--space-1);
+  padding-block: var(--space-3);
+  border-top: 1px solid var(--border-soft);
+}
+
+.about__row:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.about__row:last-child {
+  padding-bottom: 0;
+}
+
+/* Los rótulos (<dt>) usan el componente .eyebrow de base.css (--text-muted, AA). */
+
+.about__desc {
+  color: var(--text-main);
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.about__desc--mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+}
+
+.about__desc--accent {
+  color: var(--accent-bright);
+}
+
+.about__desc abbr {
+  text-decoration: underline dotted var(--accent-line);
+  text-underline-offset: 3px;
+  cursor: help;
+}
+
+/* ---------- Escritorio: texto + tarjeta en dos columnas ---------- */
+@media (width >= 960px) {
+  .about__layout {
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+    gap: var(--space-7);
+  }
+
+  .about__facts {
+    position: sticky;
+    top: calc(var(--topbar-h) + var(--space-5));
+    padding: var(--space-6) var(--space-5);
+  }
+}
+
+@media (width < 480px) {
+  .about__para {
+    padding-left: var(--space-3);
+  }
+
+  .about__facts {
+    padding: var(--space-4);
+  }
+
+  .about__facts::before {
+    left: var(--space-4);
+    right: var(--space-4);
+  }
+}

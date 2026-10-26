@@ -1,0 +1,28 @@
+/* ==========================================================================
+   chip3d.css · Lienzo del fondo 3D del hero (lo inserta assets/js/chip3d.js)
+   El contenedor .hero__bg3d (posición, opacidad global y ocultación en
+   móvil) se define en hero.css; aquí solo va el <canvas> que crea Three.js.
+   ========================================================================== */
+
+.hero__bg3d canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.6s ease;
+  /* Se funde hacia la derecha para no competir con la foto.
+     En una máscara, #000 indica opacidad total (no es un color visible). */
+  -webkit-mask-image: linear-gradient(90deg, #000 48%, transparent 80%);
+  mask-image: linear-gradient(90deg, #000 48%, transparent 80%);
+}
+
+/* chip3d.js añade la clase tras el primer fotograma: aparición suave */
+.hero__bg3d canvas.is-ready {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__bg3d canvas {
+    transition: none;
+  }
+}

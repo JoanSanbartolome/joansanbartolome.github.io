@@ -1,1091 +1,1059 @@
 <!DOCTYPE html>
-<html lang="es" class="dark scroll-smooth">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Joan San Bartolome Ferri | Ingeniero Electrónico & RTL / FPGA Developer</title>
-  <meta name="description"
-    content="Portafolio profesional de Joan San Bartolome Ferri. Ingeniero Electrónico especializado en diseño digital RTL (SystemVerilog/Verilog), FPGAs Intel/Gowin, diseño de PCBs en KiCad/Altium y sistemas embebidos.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Arranque síncrono antes de los CSS: html.js e idioma pendiente (externo por la CSP) -->
+  <script src="assets/js/boot.js"></script>
+  <title data-i18n="meta.title">Joan San Bartolomé Ferri · Ingeniero de Diseño y Verificación Digital</title>
+  <meta name="description" data-i18n-attr="content:meta.description"
+    content="Portafolio de Joan San Bartolomé Ferri, ingeniero electrónico especializado en diseño y verificación digital (RTL, SystemVerilog, FPGA), diseño de PCB y sistemas embebidos. Valencia.">
+  <meta name="author" content="Joan San Bartolomé Ferri">
+  <meta name="theme-color" content="#08070a">
+  <link rel="canonical" href="https://joansanbartolome.es/">
 
-  <!-- Estilos CSS compilados -->
-  <link href="./assets/css/style.css" rel="stylesheet">
+  <!-- Open Graph / redes sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://joansanbartolome.es/">
+  <meta property="og:title" content="Joan San Bartolomé Ferri · Diseño y Verificación Digital">
+  <meta property="og:description"
+    content="RTL en SystemVerilog, verificación con cobertura funcional, FPGA y PCB. Proyectos, trayectoria y contacto.">
+  <meta property="og:image" content="https://joansanbartolome.es/assets/img/og-image.jpg">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Tipografías: Inter para cuerpo y JetBrains Mono para datos técnicos y código -->
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Joan San Bartolomé Ferri",
+    "jobTitle": "Ingeniero de Diseño y Verificación Digital",
+    "url": "https://joansanbartolome.es/",
+    "image": "https://joansanbartolome.es/assets/img/profile.jpg",
+    "email": "mailto:josanbart@gmail.com",
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universitat Politècnica de València" },
+    "knowsAbout": ["SystemVerilog", "Verilog", "RTL design", "Design verification", "FPGA", "PCB design", "Embedded systems"],
+    "sameAs": [
+      "https://www.linkedin.com/in/joan-san-bartolome-ferri-358818252",
+      "https://github.com/JoanSanbartolome"
+    ]
+  }
+  </script>
+
+  <!-- Tipografías -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
     rel="stylesheet">
 
-  <!-- JavaScript Vanilla Principal -->
-  <script src="./assets/js/main.js" defer></script>
+  <!-- Estilos: base común + una hoja por sección -->
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/sections/hero.css">
+  <link rel="stylesheet" href="assets/css/sections/about.css">
+  <link rel="stylesheet" href="assets/css/sections/journey.css">
+  <link rel="stylesheet" href="assets/css/sections/experience.css">
+  <link rel="stylesheet" href="assets/css/sections/featured.css">
+  <link rel="stylesheet" href="assets/css/sections/projects.css">
+  <link rel="stylesheet" href="assets/css/sections/skills.css">
+  <link rel="stylesheet" href="assets/css/sections/contact.css">
+  <link rel="stylesheet" href="assets/css/sections/chip3d.css">
+
+  <link rel="preload" as="image" href="assets/img/profile.webp" type="image/webp" fetchpriority="high">
+
+  <!-- Scripts (defer conserva el orden): núcleo → traducciones → secciones (boot.js va arriba, síncrono) -->
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/i18n/common.js" defer></script>
+  <script src="assets/js/i18n/hero.js" defer></script>
+  <script src="assets/js/i18n/about.js" defer></script>
+  <script src="assets/js/i18n/journey.js" defer></script>
+  <script src="assets/js/i18n/experience.js" defer></script>
+  <script src="assets/js/i18n/featured.js" defer></script>
+  <script src="assets/js/i18n/projects.js" defer></script>
+  <script src="assets/js/i18n/skills.js" defer></script>
+  <script src="assets/js/i18n/contact.js" defer></script>
+  <script src="assets/js/sections/hero.js" defer></script>
+  <script src="assets/js/sections/featured.js" defer></script>
+  <script src="assets/js/sections/contact.js" defer></script>
+  <script src="assets/js/chip3d.js" type="module"></script>
 </head>
 
-<body
-  class="bg-brand-bgDark text-zinc-300 font-sans antialiased selection:bg-cyan-500/20 selection:text-cyan-400 min-h-screen relative flex flex-col">
+<body>
+  <a class="skip-link" href="#main" data-i18n="common.skip">Saltar al contenido</a>
 
-  <!-- Fondo digital global con líneas scanline de ingeniería / PCB -->
-  <div id="global-bg-overlay" class="absolute inset-0 bg-pattern-scanlines pointer-events-none z-0"></div>
+  <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar"></div></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
 
-  <!-- Gradiente superior de consola -->
-  <div
-    class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[380px] bg-gradient-to-b from-cyan-500/10 via-cyan-500/0 to-transparent pointer-events-none z-0">
-  </div>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="logo" href="#hero">JS<span class="logo__accent">B</span><span class="visually-hidden"
+          data-i18n="nav.home_sr"> · Joan San Bartolomé Ferri, inicio</span></a>
 
-  <!-- MÓDULO 1: HEADER (Navegación Fija) -->
-  <header class="sticky top-0 z-50 w-full border-b border-brand-borderDark bg-brand-bgDark/85 backdrop-blur-md">
-    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-
-      <!-- Navegación Escritorio (Alineada a la izquierda) -->
-      <nav class="hidden md:flex items-center gap-8 font-mono text-xs tracking-wider">
-        <a href="#skills" class="text-zinc-400 hover:text-zinc-100 transition-colors flex items-center gap-1">
-          <span class="text-brand-accent">01.</span> STACK
-        </a>
-        <a href="#projects" class="text-zinc-400 hover:text-zinc-100 transition-colors flex items-center gap-1">
-          <span class="text-brand-accent">02.</span> PROYECTOS
-        </a>
-        <a href="#experience" class="text-zinc-400 hover:text-zinc-100 transition-colors flex items-center gap-1">
-          <span class="text-brand-accent">03.</span> TRAYECTORIA
-        </a>
-        <a href="#contact" class="text-zinc-400 hover:text-zinc-100 transition-colors flex items-center gap-1">
-          <span class="text-brand-accent">04.</span> CONTACTO
-        </a>
+      <nav class="nav" id="site-nav" aria-label="Principal" data-i18n-attr="aria-label:nav.label">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#about" data-i18n="nav.about">Sobre mí</a></li>
+          <li><a class="nav__link" href="#journey" data-i18n="nav.journey">Trayectoria</a></li>
+          <li><a class="nav__link" href="#experience" data-i18n="nav.experience">Experiencia</a></li>
+          <li><a class="nav__link" href="#featured" data-i18n="nav.featured">Placa STM32</a></li>
+          <li><a class="nav__link" href="#projects" data-i18n="nav.projects">Proyectos</a></li>
+          <li><a class="nav__link" href="#skills" data-i18n="nav.skills">Habilidades</a></li>
+          <li><a class="nav__link" href="#contact" data-i18n="nav.contact">Contacto</a></li>
+        </ul>
       </nav>
 
-      <!-- Botón Menú Móvil -->
-      <div class="flex items-center ml-auto md:ml-0">
-        <button id="menu-btn" class="md:hidden text-zinc-400 hover:text-zinc-100 focus:outline-none p-1"
-          aria-label="Abrir menú">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-              d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+      <div class="topbar__actions">
+        <div class="lang-toggle" role="group" aria-label="Idioma" data-i18n-attr="aria-label:nav.lang">
+          <button class="lang-toggle__btn" type="button" data-lang-btn="es" aria-pressed="true" lang="es">ES</button>
+          <button class="lang-toggle__btn" type="button" data-lang-btn="en" aria-pressed="false" lang="en">EN</button>
+        </div>
+        <button class="menu-btn" type="button" data-menu-btn aria-controls="site-nav" aria-expanded="false"
+          aria-label="Abrir menú" data-i18n-attr="aria-label:nav.menu">
+          <span class="menu-btn__bars" aria-hidden="true"></span>
         </button>
       </div>
-    </div>
-
-    <!-- Menú Desplegable Móvil -->
-    <div id="mobile-menu"
-      class="hidden border-b border-brand-borderDark bg-brand-bgDark/95 backdrop-blur-lg md:hidden px-6 py-4">
-      <nav class="flex flex-col gap-3 font-mono text-xs tracking-wider">
-        <a href="#skills"
-          class="mobile-link text-zinc-400 hover:text-zinc-100 transition-colors py-1.5 flex items-center gap-2">
-          <span class="text-brand-accent">01.</span> STACK TÉCNICO
-        </a>
-        <a href="#projects"
-          class="mobile-link text-zinc-400 hover:text-zinc-100 transition-colors py-1.5 flex items-center gap-2">
-          <span class="text-brand-accent">02.</span> PROYECTOS
-        </a>
-        <a href="#experience"
-          class="mobile-link text-zinc-400 hover:text-zinc-100 transition-colors py-1.5 flex items-center gap-2">
-          <span class="text-brand-accent">03.</span> TRAYECTORIA & FORMACIÓN
-        </a>
-        <a href="#contact"
-          class="mobile-link text-zinc-400 hover:text-zinc-100 transition-colors py-1.5 flex items-center gap-2">
-          <span class="text-brand-accent">04.</span> CONTACTO
-        </a>
-      </nav>
     </div>
   </header>
 
-  <!-- CONTENEDOR PRINCIPAL -->
-  <main class="max-w-5xl mx-auto px-6 py-12 space-y-28 z-10 flex-grow w-full">
+  <main id="main">
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+          <div class="hero__bg3d" id="chip3d" aria-hidden="true"></div>
 
-    <!-- MÓDULO 2: HERO / PRESENTACIÓN -->
-    <section id="hero" class="pt-6 md:pt-12 flex flex-col justify-center min-h-[55vh] relative">
+          <div class="container hero__inner">
+            <div class="hero__content">
+              <p class="eyebrow hero__tag" data-i18n="hero.tag">Ingeniero de Diseño y Verificación Digital</p>
 
-      <div class="space-y-6">
-        <div
-          class="inline-flex items-center gap-2 px-3 py-1 border border-brand-borderDark bg-zinc-900/80 font-mono text-xs text-brand-accent tracking-wider font-semibold">
-          <span class="text-zinc-500">&gt;</span> INGENIERO ELECTRÓNICO INDUSTRIAL & MASTER EN SISTEMAS ELECTRÓNICOS
-        </div>
+              <h1 class="hero__title" id="hero-title">
+                <span class="hero__hello" data-i18n="hero.hello">Hola, soy</span>
+                <span class="hero__name">Joan San Bartolomé</span>
+              </h1>
 
-        <h1 class="text-4xl sm:text-6xl font-bold tracking-tight text-zinc-100 leading-tight">
-          Joan San Bartolome Ferri
-        </h1>
+              <p class="hero__lead" data-i18n-html="hero.lead">
+                Ingeniero electrónico cursando el <strong>Máster Universitario en Ingeniería de Sistemas Electrónicos</strong>
+                en la UPV (fin previsto: enero de 2027). Me centro en el <strong>diseño RTL en Verilog/SystemVerilog para
+                FPGA</strong> y en su verificación, y llevo los diseños de la especificación al hardware: RTL, PCB y
+                sistemas embebidos.
+              </p>
 
-        <h2 class="text-lg sm:text-2xl font-mono text-zinc-400 font-medium leading-relaxed">
-          Diseño Digital RTL <span class="text-brand-accent">•</span> FPGAs <span class="text-brand-accent">•</span>
-          Prototipado PCB <span class="text-brand-accent">•</span> Sistemas Embebidos
-        </h2>
+              <div class="hero__actions">
+                <a class="btn btn--primary" href="#projects">
+                  <span data-i18n="hero.cta_projects">Ver proyectos</span>
+                  <svg class="hero__btn-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+                    <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+                <a class="btn btn--ghost" href="assets/docs/Joan_San_Bartolome_Ferri_CV_ES.pdf" download
+                  data-i18n-attr="href:hero.cv_href">
+                  <svg class="hero__btn-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+                    <path d="M12 4v11M7 10l5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <span data-i18n="hero.cta_cv">Descargar CV</span>
+                </a>
+              </div>
 
-        <p class="max-w-2xl text-sm text-zinc-400 leading-relaxed font-sans">
-          Ingeniero Electrónico especializado en la concepción y verificación de sistemas digitales en hardware. Amplia
-          experiencia en descripción RTL con <span class="text-zinc-200 font-medium">SystemVerilog / Verilog</span>,
-          aceleración de algoritmos en <span class="text-zinc-200 font-medium">FPGAs (Intel Cyclone, Gowin)</span>,
-          diseño de tarjetas <span class="text-zinc-200 font-medium">PCB (Altium, KiCad)</span> y desarrollo sobre
-          microcontroladores <span class="text-zinc-200 font-medium">STM32 / ESP32</span>. Apasionado por la
-          optimización de procesos mediante Inteligencia Artificial.
-        </p>
+              <div class="hero__terminal" role="img"
+                aria-label="Terminal con datos clave: Máster MUISE en la UPV, fin previsto en enero de 2027; objetivo, prácticas en diseño o verificación digital; herramientas, SystemVerilog, QuestaSim, FPGA y Altium; cobertura funcional de la FIFO, 100 % (141 de 141 bins)."
+                data-i18n-attr="aria-label:hero.term_label">
+                <div class="hero__term-bar" aria-hidden="true">
+                  <span class="hero__term-dot"></span>
+                  <span class="hero__term-dot"></span>
+                  <span class="hero__term-dot"></span>
+                  <span class="hero__term-title">joan@silicon</span>
+                </div>
+                <p class="hero__term-body mono" aria-hidden="true">
+                  <span class="hero__term-prompt">&gt;</span>
+                  <span class="hero__term-line" data-hero-typed><span class="hero__term-key">estado</span><span
+                      class="hero__term-op"> = </span><span class="hero__term-val">'Máster MUISE (UPV) · fin previsto ene 2027'</span></span><span
+                    class="hero__term-cursor"></span>
+                </p>
+              </div>
+            </div>
 
-        <!-- Chips de Especialidad Rápida -->
-        <div class="flex flex-wrap gap-2 pt-2 font-mono text-[11px]">
-          <span
-            class="px-2.5 py-1 bg-zinc-900/90 border border-brand-borderDark text-zinc-300 flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 bg-cyan-400"></span>SystemVerilog / Verilog RTL
-          </span>
-          <span
-            class="px-2.5 py-1 bg-zinc-900/90 border border-brand-borderDark text-zinc-300 flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 bg-cyan-400"></span>Intel Cyclone IV / V & Tang Nano
-          </span>
-          <span
-            class="px-2.5 py-1 bg-zinc-900/90 border border-brand-borderDark text-zinc-300 flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 bg-cyan-400"></span>PCB Layout (Altium / KiCad)
-          </span>
-          <span
-            class="px-2.5 py-1 bg-zinc-900/90 border border-brand-borderDark text-zinc-300 flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 bg-cyan-400"></span>Co-diseño Nios II & RTOS
-          </span>
-          <span
-            class="px-2.5 py-1 bg-zinc-900/90 border border-brand-borderDark text-zinc-300 flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 bg-cyan-400"></span>MATLAB / Simulink (HDL Coder)
-          </span>
-        </div>
+            <div class="hero__media">
+              <div class="hero__photo-frame">
+                <picture>
+                  <source srcset="assets/img/profile.webp" type="image/webp">
+                  <img class="hero__photo" src="assets/img/profile.jpg" width="720" height="798" loading="eager"
+                    fetchpriority="high" decoding="async" alt="Retrato de Joan San Bartolomé Ferri"
+                    data-i18n-attr="alt:hero.photo_alt">
+                </picture>
+              </div>
+              <p class="pill hero__badge">
+                <span class="hero__badge-dot" aria-hidden="true"></span>
+                <span data-i18n="hero.badge">Buscando prácticas</span>
+              </p>
+            </div>
 
-        <!-- Botones de Acción -->
-        <div class="flex flex-wrap items-center gap-4 pt-6 font-mono text-xs">
-          <a href="#projects"
-            class="px-6 py-3 bg-brand-accent text-zinc-950 font-bold hover:bg-cyan-300 transition-all tracking-wider shadow-lg shadow-cyan-500/10 flex items-center gap-2">
-            EXPLORAR PROYECTOS
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </a>
+            <ul class="hero__stats" role="list">
+              <li class="card hero__stat reveal">
+                <p class="hero__stat-value mono">100&nbsp;%</p>
+                <p class="hero__stat-label" data-i18n="hero.stat1_label">cobertura funcional en la verificación de una FIFO
+                  síncrona (141/141 bins)</p>
+              </li>
+              <li class="card hero__stat reveal">
+                <p class="hero__stat-value mono" data-i18n="hero.stat2_value">48&nbsp;kHz / 24&nbsp;bits</p>
+                <p class="hero__stat-label" data-i18n="hero.stat2_label">filtro crossover IIR en FPGA en tiempo real,
+                  verificado bit a bit</p>
+              </li>
+              <li class="card hero__stat reveal">
+                <p class="hero__stat-value mono" data-i18n="hero.stat3_value">4 capas</p>
+                <p class="hero__stat-label" data-i18n="hero.stat3_label">PCB con impedancia controlada para un STM32F746ZG
+                  (nota 9,5/10)</p>
+              </li>
+            </ul>
+          </div>
+    </section>
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-tag" data-i18n="about.tag">Quién soy</p>
+          <h2 class="section-title" id="about-title" data-i18n="about.title">Sobre mí</h2>
+        </header>
 
-          <a href="https://github.com/JoanSanbartolome" target="_blank" rel="noopener noreferrer"
-            class="px-5 py-3 bg-zinc-900 border border-brand-borderDark text-zinc-300 font-medium hover:bg-zinc-800 hover:text-zinc-100 hover:border-zinc-700 transition-all flex items-center gap-2">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.646.64.699 1.026 1.592 1.026 2.683 0 3.842-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-            </svg>
-            GITHUB
-          </a>
+        <div class="about__layout">
+          <div class="about__text">
+            <p class="about__para reveal" data-i18n-html="about.p1">Soy <strong>ingeniero electrónico</strong>, graduado en Ingeniería Electrónica Industrial y Automática por la UPV, y estoy cursando el <strong>Máster Universitario en Ingeniería de Sistemas Electrónicos</strong> en la UPV (fin previsto: enero de 2027). Me centro en el <strong>diseño RTL en Verilog/SystemVerilog</strong> para FPGA y en la <strong>verificación</strong>.</p>
 
-          <a href="https://www.linkedin.com/in/joan-san-bartolome-ferri-358818252/" target="_blank"
-            rel="noopener noreferrer"
-            class="px-5 py-3 bg-zinc-900 border border-brand-borderDark text-zinc-300 font-medium hover:bg-zinc-800 hover:text-zinc-100 hover:border-zinc-700 transition-all flex items-center gap-2">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-              <path
-                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-            </svg>
-            LINKEDIN
-          </a>
+            <p class="about__para reveal" data-i18n-html="about.p2">Me gusta llevar los diseños <strong>de la idea al hardware</strong> (RTL, PCB y firmware) y verificar lo que diseño contra modelos de referencia: verifiqué un filtro IIR <strong>bit a bit contra un golden model en Python</strong> y construí un banco de pruebas orientado a objetos (pre-UVM) con <strong>estímulos aleatorios restringidos</strong> que alcanza el <strong>100 % de cobertura funcional</strong> en una FIFO síncrona.</p>
+
+            <p class="about__para reveal" data-i18n-html="about.p3">He diseñado una <strong>placa de 4 capas en Altium con impedancia controlada</strong> y un <strong>SoC Nios II con RTOS</strong> y periféricos propios; además, he implementado una <strong>UART propia en RTL</strong> y diseñado a nivel de placa interfaces <strong>CAN, Ethernet y USB</strong>. Mi formación incluye también el <strong>Máster en IA Aplicada</strong> (Visual Business School, abr – oct 2026), y me apoyo en herramientas de IA en el flujo de diseño, como hice en el filtro crossover.</p>
+
+            <p class="about__para reveal" data-i18n-html="about.p4">Desde 2021 trabajo como <strong>camarero jefe</strong> y lo he compaginado con un grado y dos másteres. Ahora busco <strong>prácticas en diseño o verificación digital (ASIC/FPGA) en Valencia</strong>.</p>
+          </div>
+
+          <aside class="about__facts card reveal" aria-labelledby="about-facts-title">
+            <h3 class="about__facts-title" id="about-facts-title" data-i18n="about.facts.title">Datos rápidos</h3>
+            <dl class="about__list">
+              <div class="about__row">
+                <dt class="about__term eyebrow" data-i18n="about.facts.focus.label">Enfoque</dt>
+                <dd class="about__desc about__desc--mono" data-i18n="about.facts.focus.value">RTL · Verificación · FPGA</dd>
+              </div>
+              <div class="about__row">
+                <dt class="about__term eyebrow" data-i18n="about.facts.edu.label">Formación</dt>
+                <dd class="about__desc" data-i18n-html="about.facts.edu.value">Máster <abbr title="Máster Universitario en Ingeniería de Sistemas Electrónicos">MUISE</abbr> (UPV), fin previsto 01/2027</dd>
+              </div>
+              <div class="about__row">
+                <dt class="about__term eyebrow" data-i18n="about.facts.lang.label">Idiomas</dt>
+                <dd class="about__desc" data-i18n="about.facts.lang.value">Español, valenciano, inglés B1</dd>
+              </div>
+              <div class="about__row">
+                <dt class="about__term eyebrow" data-i18n="about.facts.seek.label">Busco</dt>
+                <dd class="about__desc about__desc--accent" data-i18n="about.facts.seek.value">Prácticas en diseño o verificación digital</dd>
+              </div>
+            </dl>
+          </aside>
         </div>
       </div>
     </section>
+    <section id="journey" class="section" aria-labelledby="journey-title">
+      <div class="container">
+        <div class="panel">
+          <header class="section-head reveal">
+            <p class="section-tag" data-i18n="journey.tag">El camino hasta ahora</p>
+            <h2 class="section-title" id="journey-title" data-i18n="journey.title">Mi trayectoria</h2>
+          </header>
 
-    <!-- MÓDULO 3: SKILLS (Stack Técnico y Herramientas) -->
-    <section id="skills" class="space-y-10">
-      <!-- Encabezado de Sección -->
-      <div class="flex items-center gap-4">
-        <span class="font-mono text-sm text-brand-accent">// 01.</span>
-        <h2 class="text-xl font-bold tracking-wider text-zinc-100 uppercase">Stack Técnico & Herramientas</h2>
-        <div class="h-[1px] bg-brand-borderDark flex-grow"></div>
-      </div>
+          <ol class="journey__list" role="list">
+            <li class="journey__item reveal">
+              <p class="journey__date">
+                <time datetime="2021-01" data-i18n="journey.date.2021-01">ene 2021</time>
+                <span aria-hidden="true">–</span>
+                <span data-i18n="journey.present">actualidad</span>
+              </p>
+              <h3 class="journey__title" data-i18n="journey.sequial.title">Camarero jefe</h3>
+              <p class="journey__org">Bar Sequial 20</p>
+              <p class="journey__text" data-i18n="journey.sequial.text">Coordino el servicio de sala en hora punta (más de 150 comensales) y formo a nuevos camareros, compaginándolo durante más de 5 años con un grado y dos másteres.</p>
+            </li>
 
-      <!-- Rejilla de 4 Tarjetas por Categoría -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <li class="journey__item reveal">
+              <p class="journey__date">
+                <time datetime="2021-09" data-i18n="journey.date.2021-09">sep 2021</time>
+                <span aria-hidden="true">–</span>
+                <time datetime="2026-01" data-i18n="journey.date.2026-01">ene 2026</time>
+              </p>
+              <h3 class="journey__title" data-i18n="journey.bsc.title">Grado en Ingeniería Electrónica Industrial y Automática</h3>
+              <p class="journey__org">Universitat Politècnica de València</p>
+              <p class="journey__text" data-i18n="journey.bsc.text">Especialidad en electrónica industrial y automática.</p>
+            </li>
 
-        <!-- Tarjeta 1: Lenguajes & RTL -->
-        <div class="bg-brand-cardDark border border-brand-borderDark p-6 card-glow flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-3 mb-5 border-b border-brand-borderDark/60 pb-3">
-              <div
-                class="w-8 h-8 border border-brand-borderDark bg-zinc-900 flex items-center justify-center text-brand-accent font-mono text-xs font-bold">
-                01
-              </div>
-              <div>
-                <h3 class="font-bold text-zinc-100 text-sm tracking-wide">Lenguajes & Descripción RTL</h3>
-                <span class="font-mono text-[10px] text-zinc-500">Síntesis, modelado y programación</span>
-              </div>
-            </div>
+            <li class="journey__item reveal">
+              <p class="journey__date">
+                <time datetime="2024-07" data-i18n="journey.date.2024-07">jul 2024</time>
+                <span aria-hidden="true">–</span>
+                <time datetime="2024-08" data-i18n="journey.date.2024-08">ago 2024</time>
+              </p>
+              <h3 class="journey__title" data-i18n="journey.romar.title">Técnico de mantenimiento electrónico industrial (prácticas)</h3>
+              <p class="journey__org">Postres Lácteos Romar · Catadau</p>
+              <p class="journey__text" data-i18n="journey.romar.text">Mantenimiento preventivo y correctivo de maquinaria automatizada en una planta de producción continua, con diagnóstico de fallos en sensores, actuadores y control eléctrico.</p>
+            </li>
 
-            <div class="grid grid-cols-2 gap-2 font-mono text-xs text-zinc-300">
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> SystemVerilog
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Verilog HDL
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> MATLAB
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Python
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> C / C++
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> HLS (High Level)
-              </div>
-            </div>
-          </div>
-          <div class="mt-4 pt-3 border-t border-brand-borderDark/40 font-mono text-[10px] text-zinc-500">
-            * Especialización en FSMs complejas, aserciones y pipelining.
-          </div>
+            <li class="journey__item reveal">
+              <p class="journey__date">
+                <time datetime="2025-04" data-i18n="journey.date.2025-04">abr 2025</time>
+                <span aria-hidden="true">–</span>
+                <time datetime="2026-01" data-i18n="journey.date.2026-01">ene 2026</time>
+              </p>
+              <h3 class="journey__title" data-i18n="journey.tfg.title">Trabajo Fin de Grado: controlador inalámbrico de riego por goteo</h3>
+              <p class="journey__org">Universitat Politècnica de València</p>
+              <p class="journey__text" data-i18n="journey.tfg.text">PCB de 2 capas en KiCad con ESP32-S2, fabricada y validada; firmware en ESPHome con actualizaciones OTA e integración con Home Assistant.</p>
+              <p class="journey__note" data-i18n="journey.tfg.grade">Nota: 8/10</p>
+            </li>
+
+            <li class="journey__item journey__item--current reveal">
+              <p class="journey__date">
+                <time datetime="2025-09" data-i18n="journey.date.2025-09">sep 2025</time>
+                <span aria-hidden="true">–</span>
+                <time datetime="2027-01" data-i18n="journey.date.2027-01">ene 2027</time>
+                <span data-i18n="journey.expected">(previsto)</span>
+                <span class="pill" data-i18n="journey.current">En curso</span>
+              </p>
+              <h3 class="journey__title" data-i18n="journey.msc.title">Máster Universitario en Ingeniería de Sistemas Electrónicos</h3>
+              <p class="journey__org">Universitat Politècnica de València</p>
+              <p class="journey__text" data-i18n="journey.msc.text">Microelectrónica y sistemas digitales: RTL avanzado, co-diseño SoC, verificación funcional y PCB multicapa.</p>
+            </li>
+
+            <li class="journey__item reveal">
+              <p class="journey__date">
+                <time datetime="2026-04" data-i18n="journey.date.2026-04">abr 2026</time>
+                <span aria-hidden="true">–</span>
+                <time datetime="2026-10" data-i18n="journey.date.2026-10">oct 2026</time>
+              </p>
+              <h3 class="journey__title" data-i18n="journey.ai.title">Máster en IA Aplicada y Optimización de Procesos Productivos</h3>
+              <p class="journey__org">Visual Business School</p>
+              <p class="journey__text" data-i18n="journey.ai.text">Machine learning, optimización y empleabilidad con IA.</p>
+            </li>
+          </ol>
         </div>
-
-        <!-- Tarjeta 2: Hardware Real (FPGAs & Microcontroladores) -->
-        <div class="bg-brand-cardDark border border-brand-borderDark p-6 card-glow flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-3 mb-5 border-b border-brand-borderDark/60 pb-3">
-              <div
-                class="w-8 h-8 border border-brand-borderDark bg-zinc-900 flex items-center justify-center text-brand-accent font-mono text-xs font-bold">
-                02
-              </div>
-              <div>
-                <h3 class="font-bold text-zinc-100 text-sm tracking-wide">FPGAs & Microcontroladores</h3>
-                <span class="font-mono text-[10px] text-zinc-500">Plataformas de silicio utilizadas</span>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2 font-mono text-xs text-zinc-300">
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Intel Cyclone IV
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Cyclone V (SoC)
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Tang Nano 9k
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> STM32 (Cortex-M)
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> ESP32
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Raspberry Pi
-              </div>
-            </div>
-          </div>
-          <div class="mt-4 pt-3 border-t border-brand-borderDark/40 font-mono text-[10px] text-zinc-500">
-            * Referencias en trabajos DE2-115, EEAV y SID Master.
-          </div>
-        </div>
-
-        <!-- Tarjeta 3: Entornos EDA & IDEs -->
-        <div class="bg-brand-cardDark border border-brand-borderDark p-6 card-glow flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-3 mb-5 border-b border-brand-borderDark/60 pb-3">
-              <div
-                class="w-8 h-8 border border-brand-borderDark bg-zinc-900 flex items-center justify-center text-brand-accent font-mono text-xs font-bold">
-                03
-              </div>
-              <div>
-                <h3 class="font-bold text-zinc-100 text-sm tracking-wide">Entornos EDA & Simulación</h3>
-                <span class="font-mono text-[10px] text-zinc-500">Compilación y desarrollo</span>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2 font-mono text-xs text-zinc-300">
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> ModelSim / Questa
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Intel Quartus Prime
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> STM Cube IDE
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Gowin EDA
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Antigravity IDE
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Eclipse / VS Code
-              </div>
-            </div>
-          </div>
-          <div class="mt-4 pt-3 border-t border-brand-borderDark/40 font-mono text-[10px] text-zinc-500">
-            * Simulación funcional, análisis de ondas y síntesis física.
-          </div>
-        </div>
-
-        <!-- Tarjeta 4: Diseño CAD & Software Técnico -->
-        <div class="bg-brand-cardDark border border-brand-borderDark p-6 card-glow flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-3 mb-5 border-b border-brand-borderDark/60 pb-3">
-              <div
-                class="w-8 h-8 border border-brand-borderDark bg-zinc-900 flex items-center justify-center text-brand-accent font-mono text-xs font-bold">
-                04
-              </div>
-              <div>
-                <h3 class="font-bold text-zinc-100 text-sm tracking-wide">Diseño CAD & Software</h3>
-                <span class="font-mono text-[10px] text-zinc-500">Esquemáticos, PCB y CAD 3D</span>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2 font-mono text-xs text-zinc-300">
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> KiCad (TFG)
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Altium Designer
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Cadence Virtuoso
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Proteus
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> AutoCAD
-              </div>
-              <div class="p-2 bg-zinc-900/60 border border-brand-borderDark/50 flex items-center gap-2">
-                <span class="text-brand-accent">▸</span> Fusion 360
-              </div>
-            </div>
-          </div>
-          <div class="mt-4 pt-3 border-t border-brand-borderDark/40 font-mono text-[10px] text-zinc-500">
-            * Ruteado multicapa, integridad de señal y modelado 3D.
-          </div>
-        </div>
-
       </div>
     </section>
+    <section id="experience" class="section" aria-labelledby="experience-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-tag" data-i18n="experience.tag">Trabajo</p>
+          <h2 class="section-title" id="experience-title" data-i18n="experience.title">Experiencia</h2>
+        </header>
 
-    <!-- MÓDULO 4: PROYECTOS (El Núcleo) -->
-    <section id="projects" class="space-y-10">
-      <!-- Encabezado de Sección -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div class="flex items-center gap-4">
-          <span class="font-mono text-sm text-brand-accent">// 02.</span>
-          <h2 class="text-xl font-bold tracking-wider text-zinc-100 uppercase">Proyectos Destacados</h2>
-        </div>
-
-        <!-- Filtros por área técnica -->
-        <div class="flex flex-wrap gap-2 font-mono text-xs">
-          <button data-filter="all"
-            class="project-filter-btn px-3 py-1.5 bg-brand-accent text-zinc-950 border border-transparent font-bold transition-all">
-            TODOS
-          </button>
-          <button data-filter="pcb"
-            class="project-filter-btn px-3 py-1.5 bg-zinc-900 text-zinc-400 border border-brand-borderDark hover:text-zinc-100 transition-all">
-            DISEÑO PCB
-          </button>
-          <button data-filter="rtl"
-            class="project-filter-btn px-3 py-1.5 bg-zinc-900 text-zinc-400 border border-brand-borderDark hover:text-zinc-100 transition-all">
-            RTL & FPGA
-          </button>
-          <button data-filter="embedded"
-            class="project-filter-btn px-3 py-1.5 bg-zinc-900 text-zinc-400 border border-brand-borderDark hover:text-zinc-100 transition-all">
-            SISTEMAS EMBEBIDOS
-          </button>
-        </div>
-      </div>
-
-      <div class="h-[1px] bg-brand-borderDark -mt-4"></div>
-
-      <!-- Tarjetas de Proyectos Reales -->
-      <div class="grid grid-cols-1 gap-6">
-
-        <!-- Proyecto 1: TFG PCB Riego -->
-        <article
-          class="project-card bg-brand-cardDark border border-brand-borderDark p-6 md:p-8 card-glow flex flex-col justify-between gap-6"
-          data-category="pcb embedded">
-          <div class="space-y-4">
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <span class="font-mono text-xs text-brand-accent font-semibold tracking-widest uppercase">// PROYECTO TFG
-                • PCB & EMBEBIDOS</span>
-              <span
-                class="px-2.5 py-0.5 border border-cyan-500/30 bg-cyan-500/10 text-[10px] font-mono font-semibold text-brand-accent uppercase tracking-wider">Trabajo
-                Fin de Grado</span>
-            </div>
-
-            <h3 class="text-xl font-bold text-zinc-100 tracking-tight">
-              Estudio, Diseño y Fabricación de Dispositivo Inalámbrico para Control de Riego por Goteo
-            </h3>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Problema de Ingeniería:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Necesidad de automatizar la monitorización ambiental y la activación de electroválvulas en parcelas de
-                  riego por goteo con bajo consumo energético y autonomía de batería en campo.
-                </p>
-              </div>
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Solución Implementada:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Diseño de esquemático y layout completo de PCB en <span class="text-zinc-200">KiCad</span>.
-                  Integración de transceptor de radiofrecuencia, gestión de potencia de ultra bajo consumo y firmware de
-                  control para comunicación inalámbrica de estado.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-brand-borderDark/60">
-            <div class="flex flex-wrap gap-1.5">
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">KiCad
-                PCB</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Transmisión
-                RF Inalámbrica</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Bajo
-                Consumo</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Microcontrolador</span>
-            </div>
-
-            <a href="https://riunet.upv.es/entities/publication/cdbcee13-43cf-4fc7-8983-16a64d0a1f53" target="_blank"
-              rel="noopener noreferrer"
-              class="font-mono text-xs font-bold text-brand-accent hover:text-cyan-300 transition-colors flex items-center gap-1.5">
-              [VER MEMORIA TFG EN RIUNET UPV]
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- Proyecto 2: Osciloscopio Digital FPGA -->
-        <article
-          class="project-card bg-brand-cardDark border border-brand-borderDark p-6 md:p-8 card-glow flex flex-col justify-between gap-6"
-          data-category="rtl">
-          <div class="space-y-4">
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <span class="font-mono text-xs text-brand-accent font-semibold tracking-widest uppercase">// PROYECTO RTL
-                • FPGA NIVEL 10</span>
-              <span
-                class="px-2.5 py-0.5 border border-cyan-500/30 bg-cyan-500/10 text-[10px] font-mono font-semibold text-brand-accent uppercase tracking-wider">Procesado
-                de Señal</span>
-            </div>
-
-            <h3 class="text-xl font-bold text-zinc-100 tracking-tight">
-              Osciloscopio Digital con Adquisición de Datos en Tiempo Real
-            </h3>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Problema de Ingeniería:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Adquisición y representación continua de señales analógicas de alta frecuencia garantizando cero
-                  pérdidas de muestras y sincronismo de disparo (trigger) instantáneo.
-                </p>
-              </div>
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Solución Implementada:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Desarrollo de módulos RTL en <span class="text-zinc-200">SystemVerilog / Verilog</span> sobre la placa
-                  <span class="text-zinc-200">DE2-115 (Altera Cyclone IV)</span>. Arquitectura de memoria RAM/FIFO
-                  circular para buffering de muestras y controlador gráfico directo.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-brand-borderDark/60">
-            <div class="flex flex-wrap gap-1.5">
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">SystemVerilog</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Cyclone
-                IV FPGA</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Placa
-                DE2-115</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Adquisición
-                Real-Time</span>
-            </div>
-
-            <a href="https://github.com/JoanSanbartolome" target="_blank" rel="noopener noreferrer"
-              class="font-mono text-xs font-bold text-brand-accent hover:text-cyan-300 transition-colors flex items-center gap-1.5">
-              [CÓDIGO RTL EN GITHUB]
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- Proyecto 3: Acelerador IP FFT -->
-        <article
-          class="project-card bg-brand-cardDark border border-brand-borderDark p-6 md:p-8 card-glow flex flex-col justify-between gap-6"
-          data-category="rtl">
-          <div class="space-y-4">
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <span class="font-mono text-xs text-brand-accent font-semibold tracking-widest uppercase">// PROYECTO RTL
-                • IP CORE NIVEL 9</span>
-              <span
-                class="px-2.5 py-0.5 border border-cyan-500/30 bg-cyan-500/10 text-[10px] font-mono font-semibold text-brand-accent uppercase tracking-wider">Aceleración
-                Hardware</span>
-            </div>
-
-            <h3 class="text-xl font-bold text-zinc-100 tracking-tight">
-              Diseño y Verificación de Acelerador IP para la Función FFT
-            </h3>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Problema de Ingeniería:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Carga computacional excesiva en cálculos de Transformada Rápida de Fourier (FFT) cuando se realizan en
-                  procesadores generales para procesamiento espectral.
-                </p>
-              </div>
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Solución Implementada:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Implementación de un co-procesador IP segmentado en Verilog. Co-diseño y validación de coeficientes
-                  trigonométricos mediante modelos de referencia en <span class="text-zinc-200">MATLAB</span> y
-                  testbenches estructurados en <span class="text-zinc-200">ModelSim</span>.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-brand-borderDark/60">
-            <div class="flex flex-wrap gap-1.5">
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Verilog
-                RTL</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">FFT
-                Pipelined</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">MATLAB
-                Golden Model</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">ModelSim</span>
-            </div>
-
-            <a href="https://github.com/JoanSanbartolome" target="_blank" rel="noopener noreferrer"
-              class="font-mono text-xs font-bold text-brand-accent hover:text-cyan-300 transition-colors flex items-center gap-1.5">
-              [CÓDIGO RTL EN GITHUB]
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- Proyecto: Filtro Crossover Digital IIR FPGA -->
-        <article
-          class="project-card bg-brand-cardDark border border-brand-borderDark p-6 md:p-8 card-glow flex flex-col justify-between gap-6"
-          data-category="rtl">
-          <div class="space-y-4">
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <span class="font-mono text-xs text-brand-accent font-semibold tracking-widest uppercase">// PROYECTO RTL
-                • Tang Nano 9K</span>
-              <span
-                class="px-2.5 py-0.5 border border-cyan-500/30 bg-cyan-500/10 text-[10px] font-mono font-semibold text-brand-accent uppercase tracking-wider">Procesado
-                de Señal</span>
-            </div>
-
-            <h3 class="text-xl font-bold text-zinc-100 tracking-tight">
-              Filtro Crossover Digital IIR (Linkwitz-Riley LR4) en FPGA
-            </h3>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Problema de Ingeniería:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Separación de frecuencia de audio multivía (Woofer LPF y Tweeter HPF) de alta fidelidad en tiempo real minimizando la distorsión por redondeo y el consumo de recursos de la FPGA.
-                </p>
-              </div>
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Solución Implementada:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Implementación de arquitectura DSP en <span class="text-zinc-200">SystemVerilog</span> con datapath de 24 bits a 48 kHz, cuantización de coeficientes <span class="text-zinc-200">Q4.36 (40 bits)</span>, acumuladores de 72 bits y transceptor UART a <span class="text-zinc-200">921,600 bps</span> en FPGA Gowin GW1NR-9C.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-brand-borderDark/60">
-            <div class="flex flex-wrap gap-1.5">
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">SystemVerilog</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Tang Nano 9K</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Filtro IIR LR4</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Q4.36 Fixed-Point</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">UART 921.6k</span>
-            </div>
-
-            <a href="https://github.com/JoanSanbartolome/Crossover_Filter_IIR_FPGA" target="_blank" rel="noopener noreferrer"
-              class="font-mono text-xs font-bold text-brand-accent hover:text-cyan-300 transition-colors flex items-center gap-1.5">
-              [CÓDIGO RTL EN GITHUB]
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- Proyecto 4: Co-diseño Nios II & RTOS -->
-        <article
-          class="project-card bg-brand-cardDark border border-brand-borderDark p-6 md:p-8 card-glow flex flex-col justify-between gap-6"
-          data-category="rtl embedded">
-          <div class="space-y-4">
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <span class="font-mono text-xs text-brand-accent font-semibold tracking-widest uppercase">// PROYECTO SOC
-                • EMBEBIDOS & FPGA</span>
-              <span
-                class="px-2.5 py-0.5 border border-cyan-500/30 bg-cyan-500/10 text-[10px] font-mono font-semibold text-brand-accent uppercase tracking-wider">SoC
-                Co-Design</span>
-            </div>
-
-            <h3 class="text-xl font-bold text-zinc-100 tracking-tight">
-              Co-diseño SoC Procesador Nios II con RTOS y Periféricos Custom
-            </h3>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Problema de Ingeniería:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Integración de lógica de hardware a medida con ejecución multitarea en tiempo real para control de
-                  periféricos sin comprometer latencias.
-                </p>
-              </div>
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Solución Implementada:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Generación de un soft-processor Nios II en <span class="text-zinc-200">Platform Designer</span> (Intel
-                  Quartus), desarrollo de periféricos Avalon en Verilog y programación del firmware en C bajo <span
-                    class="text-zinc-200">RTOS</span> usando Eclipse IDE.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-brand-borderDark/60">
-            <div class="flex flex-wrap gap-1.5">
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Intel
-                Nios II</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Platform
-                Designer</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">RTOS
-                en C</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Eclipse
-                IDE</span>
-            </div>
-
-            <a href="https://github.com/JoanSanbartolome" target="_blank" rel="noopener noreferrer"
-              class="font-mono text-xs font-bold text-brand-accent hover:text-cyan-300 transition-colors flex items-center gap-1.5">
-              [VER EN REPOSITORIO]
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- Proyecto 5: Placa STM32 Ethernet CAN -->
-        <article
-          class="project-card bg-brand-cardDark border border-brand-borderDark p-6 md:p-8 card-glow flex flex-col justify-between gap-6"
-          data-category="pcb embedded">
-          <div class="space-y-4">
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <span class="font-mono text-xs text-brand-accent font-semibold tracking-widest uppercase">// PROYECTO
-                HARDAWARE • PCB NIVEL 3</span>
-              <span
-                class="px-2.5 py-0.5 border border-cyan-500/30 bg-cyan-500/10 text-[10px] font-mono font-semibold text-brand-accent uppercase tracking-wider">Diseño
-                Altium</span>
-            </div>
-
-            <h3 class="text-xl font-bold text-zinc-100 tracking-tight">
-              Diseño Completo de Placa de Desarrollo STM32F746ZG (Ethernet, CAN, USB & QSPI)
-            </h3>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Problema de Ingeniería:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Interconexión física de buses industriales y redes de alta velocidad minimizando el ruido
-                  electromagnético (EMC) y desadaptaciones de impedancia en PCB de 4 capas.
-                </p>
-              </div>
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Solución Implementada:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Diseño esquemático y layout en <span class="text-zinc-200">Altium Designer</span>. Ruteado de pares
-                  diferenciales Ethernet RMII y USB OTG (90 Ω), CAN industrial con terminación dividida, Quad-SPI Flash y
-                  paquete completo de fabricación (Gerbers/BOM).
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-brand-borderDark/60">
-            <div class="flex flex-wrap gap-1.5">
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Altium
-                Designer</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">STM32F746ZG</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Ethernet
-                RMII</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">CAN
-                Bus</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">USB
-                OTG</span>
-            </div>
-
-            <a href="https://github.com/JoanSanbartolome/Proyecto_DCI" target="_blank" rel="noopener noreferrer"
-              class="font-mono text-xs font-bold text-brand-accent hover:text-cyan-300 transition-colors flex items-center gap-1.5">
-              [REPOSITORIO GITHUB]
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- Proyecto 6: Controlador VGA & Pantalla Táctil -->
-        <article
-          class="project-card bg-brand-cardDark border border-brand-borderDark p-6 md:p-8 card-glow flex flex-col justify-between gap-6"
-          data-category="rtl">
-          <div class="space-y-4">
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <span class="font-mono text-xs text-brand-accent font-semibold tracking-widest uppercase">// PROYECTO RTL
-                • PERIFÉRICOS FPGA</span>
-              <span
-                class="px-2.5 py-0.5 border border-cyan-500/30 bg-cyan-500/10 text-[10px] font-mono font-semibold text-brand-accent uppercase tracking-wider">Interfaz
-                de Vídeo & Serie</span>
-            </div>
-
-            <h3 class="text-xl font-bold text-zinc-100 tracking-tight">
-              Controlador de Vídeo VGA & Comunicación Serie para Pantalla Táctil TFT
-            </h3>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Problema de Ingeniería:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Generación precisa de señales de sincronismo horizontal/vertical a 25 MHz y recepción serie de
-                  coordenadas táctiles sin bloquear la FPGA.
-                </p>
-              </div>
-              <div class="space-y-1.5 bg-zinc-950/40 p-3.5 border border-brand-borderDark/40">
-                <span class="text-brand-accent font-semibold block uppercase font-mono text-[10px] tracking-wider">&gt;
-                  Solución Implementada:</span>
-                <p class="text-zinc-400 leading-relaxed">
-                  Diseño en Verilog de FSMs para temporización VGA (640x480) y decodificador de protocolo serie en la
-                  placa <span class="text-zinc-200">Altera Cyclone IV DE2-115</span>, permitiendo interacción gráfica en
-                  pantalla.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-brand-borderDark/60">
-            <div class="flex flex-wrap gap-1.5">
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Verilog
-                HDL</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">VGA
-                640x480 Timing</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Comunicación
-                Serie</span>
-              <span
-                class="px-2.5 py-0.5 bg-zinc-900 border border-brand-borderDark text-[10px] font-mono text-zinc-300">Cyclone
-                IV DE2-115</span>
-            </div>
-
-            <a href="https://github.com/JoanSanbartolome" target="_blank" rel="noopener noreferrer"
-              class="font-mono text-xs font-bold text-brand-accent hover:text-cyan-300 transition-colors flex items-center gap-1.5">
-              [VER CÓDIGO EN GITHUB]
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- MÓDULO 5: EXPERIENCE (Trayectoria / Formación) -->
-    <section id="experience" class="space-y-10">
-      <!-- Encabezado de Sección -->
-      <div class="flex items-center gap-4">
-        <span class="font-mono text-sm text-brand-accent">// 03.</span>
-        <h2 class="text-xl font-bold tracking-wider text-zinc-100 uppercase">Trayectoria & Formación</h2>
-        <div class="h-[1px] bg-brand-borderDark flex-grow"></div>
-      </div>
-
-      <!-- Pestañas de Alternancia -->
-      <div class="flex items-center gap-3 font-mono text-xs">
-        <button data-tab="tab-education"
-          class="exp-tab-btn px-4 py-2 border-b-2 border-brand-accent text-brand-accent bg-cyan-500/5 font-semibold transition-all">
-          01. FORMACIÓN ACADÉMICA & MÁSTERES
-        </button>
-        <button data-tab="tab-work"
-          class="exp-tab-btn px-4 py-2 border-b-2 border-brand-borderDark text-zinc-400 bg-zinc-900/40 font-semibold hover:text-zinc-200 transition-all">
-          02. EXPERIENCIA & PRÁCTICAS
-        </button>
-      </div>
-
-      <!-- TAB 1: FORMACIÓN ACADÉMICA -->
-      <div id="tab-education" class="exp-tab-content space-y-8">
-        <div class="relative border-l border-brand-borderDark ml-3 space-y-8 py-2">
-
-          <!-- Hito 1: Máster Sistemas Electrónicos -->
-          <div class="relative pl-8 group">
-            <div
-              class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 bg-zinc-950 border-2 border-brand-borderDark group-hover:border-brand-accent transition-colors">
-            </div>
-
-            <div class="space-y-1.5 bg-brand-cardDark border border-brand-borderDark p-5">
-              <div class="flex items-center justify-between flex-wrap gap-2">
-                <span class="font-mono text-xs text-brand-accent font-semibold">[MÁSTER UNIVERSITARIO]</span>
-                <span class="font-mono text-xs text-zinc-500">2024 - 2025</span>
-              </div>
-              <h3 class="text-base font-bold text-zinc-100">Máster Universitario en Ingeniería de Sistemas Electrónicos
+        <ul class="experience__list" role="list">
+          <li class="experience__item">
+            <article class="card reveal experience__card">
+              <p class="date-badge experience__date" data-i18n="experience.romar.date">jul 2024 – ago 2024</p>
+              <h3 class="card__title experience__title">
+                <span class="experience__company">Postres Lácteos Romar</span>:
+                <span class="experience__role" data-i18n="experience.romar.role">Técnico de mantenimiento electrónico industrial (prácticas)</span>
               </h3>
-              <p class="text-xs text-zinc-400 font-mono">Especialización en Microelectrónica & Sistemas Digitales
-                Avanzados</p>
-              <p class="text-xs text-zinc-400 pt-1 leading-relaxed">
-                Profundización en diseño RTL complejo en SystemVerilog, verificación funcional moderna (UVM),
-                prototipado avanzado en FPGAs (Cyclone V, Altium Designer), integración de procesadores embebidos Nios
-                II y diseño microelectrónico.
-              </p>
-            </div>
-          </div>
+              <p class="eyebrow experience__meta" data-i18n="experience.romar.place">Catadau (Valencia)</p>
+              <p class="card__text experience__text" data-i18n="experience.romar.text">Mantenimiento preventivo y correctivo de maquinaria automatizada en una planta de producción continua, con diagnóstico de fallos en sensores, actuadores y control eléctrico.</p>
+              <ul class="chip-list experience__chips" role="list" aria-label="Competencias" data-i18n-attr="aria-label:experience.chipsLabel">
+                <li class="chip" data-i18n="experience.romar.chip1">Mantenimiento industrial</li>
+                <li class="chip" data-i18n="experience.romar.chip2">Diagnóstico de fallos</li>
+                <li class="chip" data-i18n="experience.romar.chip3">Sensores y actuadores</li>
+                <li class="chip" data-i18n="experience.romar.chip4">Control eléctrico</li>
+              </ul>
+            </article>
+          </li>
 
-          <!-- Hito 2: Máster IA Aplicada -->
-          <div class="relative pl-8 group">
-            <div
-              class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 bg-zinc-950 border-2 border-brand-borderDark group-hover:border-brand-accent transition-colors">
-            </div>
-
-            <div class="space-y-1.5 bg-brand-cardDark border border-brand-borderDark p-5">
-              <div class="flex items-center justify-between flex-wrap gap-2">
-                <span class="font-mono text-xs text-brand-accent font-semibold">[MÁSTER COMPLEMENTARIO]</span>
-                <span class="font-mono text-xs text-zinc-500">2024 - 2025</span>
-              </div>
-              <h3 class="text-base font-bold text-zinc-100">Máster en IA Aplicada y Optimización de Procesos Productivos
+          <li class="experience__item">
+            <article class="card reveal experience__card">
+              <p class="date-badge experience__date" data-i18n="experience.bar.date">ene 2021 – actualidad</p>
+              <h3 class="card__title experience__title">
+                <span class="experience__company">Bar Sequial 20</span>:
+                <span class="experience__role" data-i18n="experience.bar.role">Camarero jefe</span>
               </h3>
-              <p class="text-xs text-zinc-400 font-mono">Integración de Modelos Inteligentes en Sistemas de Ingeniería
-              </p>
-              <p class="text-xs text-zinc-400 pt-1 leading-relaxed">
-                Aplicación de algoritmos de optimización, machine learning y procesamiento de datos para la mejora de
-                rendimiento en procesos industriales y arquitectura de sistemas inteligentes.
-              </p>
-            </div>
-          </div>
-
-          <!-- Hito 3: Grado Universitario -->
-          <div class="relative pl-8 group">
-            <div
-              class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 bg-zinc-950 border-2 border-brand-borderDark group-hover:border-brand-accent transition-colors">
-            </div>
-
-            <div class="space-y-1.5 bg-brand-cardDark border border-brand-borderDark p-5">
-              <div class="flex items-center justify-between flex-wrap gap-2">
-                <span class="font-mono text-xs text-brand-accent font-semibold">[GRADO UNIVERSITARIO]</span>
-                <span class="font-mono text-xs text-zinc-500">2019 - 2024</span>
-              </div>
-              <h3 class="text-base font-bold text-zinc-100">Grado en Ingeniería Electrónica Industrial y Automática</h3>
-              <p class="text-xs text-zinc-400 font-mono">Sistemas de Control, Procesado de Señal & Electrónica Digital
-              </p>
-              <p class="text-xs text-zinc-400 pt-1 leading-relaxed">
-                Fundamentos sólidos en teoría de circuitos, instrumentación, programación en MATLAB/Python, prototipado
-                FPGA y diseño de PCBs. Trabajo Fin de Grado (TFG) sobre sistema inalámbrico de control de riego por
-                goteo en KiCad.
-              </p>
-            </div>
-          </div>
-
-          <!-- Hito 4: Cursos -->
-          <div class="relative pl-8 group">
-            <div
-              class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 bg-zinc-950 border-2 border-brand-borderDark group-hover:border-brand-accent transition-colors">
-            </div>
-
-            <div class="space-y-1.5 bg-brand-cardDark border border-brand-borderDark p-5">
-              <div class="flex items-center justify-between flex-wrap gap-2">
-                <span class="font-mono text-xs text-brand-accent font-semibold">[CURSO ESPECIALIZADO]</span>
-                <span class="font-mono text-xs text-zinc-500">Formación Continua</span>
-              </div>
-              <h3 class="text-base font-bold text-zinc-100">Introducción a las Estructuras de Datos en Python</h3>
-              <p class="text-xs text-zinc-400 font-mono">Optimización Algorítmica y Gestión de Memoria</p>
-            </div>
-          </div>
-
-        </div>
+              <p class="card__text experience__text" data-i18n="experience.bar.text">Coordino el servicio de sala en hora punta (más de 150 comensales) con un equipo de hasta 6 personas y formo a nuevos camareros, compaginándolo durante más de 5 años con un grado y dos másteres.</p>
+              <ul class="chip-list experience__chips" role="list" aria-label="Competencias" data-i18n-attr="aria-label:experience.chipsLabel">
+                <li class="chip" data-i18n="experience.bar.chip1">Liderazgo de equipo</li>
+                <li class="chip" data-i18n="experience.bar.chip2">Trabajo bajo presión</li>
+                <li class="chip" data-i18n="experience.bar.chip3">Formación de personal</li>
+                <li class="chip" data-i18n="experience.bar.chip4">Constancia</li>
+              </ul>
+            </article>
+          </li>
+        </ul>
       </div>
-
-      <!-- TAB 2: EXPERIENCIA LABORAL (Oculto por defecto) -->
-      <div id="tab-work" class="exp-tab-content space-y-8 hidden">
-        <div class="relative border-l border-brand-borderDark ml-3 space-y-8 py-2">
-
-          <!-- Trabajo 1: Prácticas Romar -->
-          <div class="relative pl-8 group">
-            <div
-              class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 bg-zinc-950 border-2 border-brand-borderDark group-hover:border-brand-accent transition-colors">
-            </div>
-
-            <div class="space-y-1.5 bg-brand-cardDark border border-brand-borderDark p-5">
-              <div class="flex items-center justify-between flex-wrap gap-2">
-                <span class="font-mono text-xs text-brand-accent font-semibold">[PRÁCTICAS FORMATIVAS]</span>
-                <span class="font-mono text-xs text-zinc-500">15/07/2024 - 30/08/2024</span>
-              </div>
-              <h3 class="text-base font-bold text-zinc-100">Técnico de Mantenimiento Electrónico e Industrial</h3>
-              <p class="text-xs text-zinc-400 font-mono">Postres Lácteos Romar</p>
-              <p class="text-xs text-zinc-400 pt-1 leading-relaxed">
-                Supervisión y mantenimiento preventivo/correctivo de maquinaria automatizada en planta de producción.
-                Diagnóstico de fallos en instrumentación industrial, sensores, actuadores y líneas de control eléctrico.
-              </p>
-            </div>
-          </div>
-
-          <!-- Trabajo 2: Sequial20 -->
-          <div class="relative pl-8 group">
-            <div
-              class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 bg-zinc-950 border-2 border-brand-borderDark group-hover:border-brand-accent transition-colors">
-            </div>
-
-            <div class="space-y-1.5 bg-brand-cardDark border border-brand-borderDark p-5">
-              <div class="flex items-center justify-between flex-wrap gap-2">
-                <span class="font-mono text-xs text-brand-accent font-semibold">[EXPERIENCIA LABORAL]</span>
-                <span class="font-mono text-xs text-zinc-500">27/08/2021 - Actualmente</span>
-              </div>
-              <h3 class="text-base font-bold text-zinc-100">Camarero & Atención al Cliente</h3>
-              <p class="text-xs text-zinc-400 font-mono">Sequial20</p>
-              <p class="text-xs text-zinc-400 pt-1 leading-relaxed">
-                Desarrollo de competencias clave transversales: dinamismo, trabajo en equipo en entornos exigentes,
-                resolución rápida de problemas, responsabilidad operacional y comunicación fluida con personas.
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Tarjeta de Datos Adicionales -->
-      <div
-        class="bg-zinc-900/80 border border-brand-borderDark p-6 font-mono text-xs grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-        <div class="p-3 bg-zinc-950/60 border border-brand-borderDark/40">
-          <span class="text-zinc-500 block text-[10px] uppercase">CARNET DE CONDUCIR</span>
-          <span class="text-zinc-200 font-bold">Sí (Permiso B)</span>
-        </div>
-        <div class="p-3 bg-zinc-950/60 border border-brand-borderDark/40">
-          <span class="text-zinc-500 block text-[10px] uppercase">VEHÍCULO PROPIO</span>
-          <span class="text-zinc-200 font-bold">Sí</span>
-        </div>
-        <div class="p-3 bg-zinc-950/60 border border-brand-borderDark/40">
-          <span class="text-zinc-500 block text-[10px] uppercase">DISPONIBILIDAD</span>
-          <span class="text-brand-accent font-bold">Completa e Inmediata</span>
-        </div>
-      </div>
-
     </section>
+    <section id="featured" class="section" aria-labelledby="featured-title">
+      <div class="container">
+        <div class="featured__shell panel">
 
-    <!-- MÓDULO 6: FOOTER Y CONTACTO (Cierre) -->
-    <section id="contact" class="space-y-10 pt-4">
-      <!-- Encabezado de Sección -->
-      <div class="flex items-center gap-4">
-        <span class="font-mono text-sm text-brand-accent">// 04.</span>
-        <h2 class="text-xl font-bold tracking-wider text-zinc-100 uppercase">Contacto & Redes</h2>
-        <div class="h-[1px] bg-brand-borderDark flex-grow"></div>
+          <header class="section-head featured__head reveal">
+            <p class="section-tag" data-i18n="featured.tag">Proyecto destacado</p>
+            <h2 class="section-title" id="featured-title" data-i18n="featured.title">Placa de control STM32F746ZG: PCB de 4 capas con impedancia controlada</h2>
+            <p class="section-lead" data-i18n="featured.lead">Trabajo final individual de la asignatura Diseño de Circuitos Impresos del Máster en Ingeniería de Sistemas Electrónicos (UPV). A partir del diseño de referencia NUCLEO-F746ZG de ST, rediseñé la placa completa en Altium Designer: esquemático, selección de componentes, stack-up, emplazado y ruteado propios y paquete de fabricación.</p>
+            <p class="pill featured__date">
+              <time datetime="2026-02" data-i18n="featured.date_start">feb 2026</time>
+              <span aria-hidden="true">–</span>
+              <time datetime="2026-06" data-i18n="featured.date_end">jun 2026</time>
+            </p>
+          </header>
+
+          <ul class="featured__highlights reveal" role="list">
+            <li class="featured__highlight">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                  <circle cx="12" cy="9" r="6" />
+                  <path d="M8.5 14 7 22l5-3 5 3-1.5-8" />
+                </svg>
+              </span>
+              <span class="featured__highlight-body">
+                <strong class="featured__highlight-value" data-i18n="featured.hl1_value">Nota 9,5/10</strong>
+                <span class="featured__highlight-text" data-i18n="featured.hl1_text">Calificación del trabajo final de la asignatura</span>
+              </span>
+            </li>
+            <li class="featured__highlight">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                  <path d="m12 3 9 4.5-9 4.5-9-4.5z" />
+                  <path d="m3 12 9 4.5 9-4.5" />
+                  <path d="m3 16.5 9 4.5 9-4.5" />
+                </svg>
+              </span>
+              <span class="featured__highlight-body">
+                <strong class="featured__highlight-value" data-i18n="featured.hl2_value">Stack-up de 4 capas</strong>
+                <span class="featured__highlight-text" data-i18n="featured.hl2_text">Impedancia controlada: CAN 120 Ω, Ethernet MDI 100 Ω y USB FS 90 Ω</span>
+              </span>
+            </li>
+            <li class="featured__highlight">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                  <rect x="6" y="6" width="12" height="12" rx="1.5" />
+                  <rect x="9.5" y="9.5" width="5" height="5" />
+                  <path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4" />
+                </svg>
+              </span>
+              <span class="featured__highlight-body">
+                <strong class="featured__highlight-value" data-i18n="featured.hl3_value">174 componentes</strong>
+                <span class="featured__highlight-text" data-i18n="featured.hl3_text">Paquete listo para fabricar: Gerbers, BOM y Pick &amp; Place</span>
+              </span>
+            </li>
+            <li class="featured__highlight">
+              <span class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                  <path d="M2 17h4l3-10h6l3 10h4" />
+                  <path d="M2 21h20" opacity=".45" />
+                </svg>
+              </span>
+              <span class="featured__highlight-body">
+                <strong class="featured__highlight-value" data-i18n="featured.hl4_value">Integridad de señal</strong>
+                <span class="featured__highlight-text" data-i18n="featured.hl4_text">Simulación post-layout de reflexiones en CAN, USB y Ethernet</span>
+              </span>
+            </li>
+          </ul>
+
+          <ol class="featured__steps reveal" role="list">
+            <li class="featured__step">
+              <h3 class="featured__step-title" data-i18n="featured.step1_title">Esquemático jerárquico</h3>
+              <p class="featured__step-text" data-i18n="featured.step1_text">STM32F746ZG (Cortex-M7, 216 MHz), Ethernet 10/100 con PHY LAN8742A por RMII, USB 2.0 Full-Speed, 2 buses CAN, Flash NOR por SPI y depuración por SWD en lugar del ST-LINK integrado.</p>
+            </li>
+            <li class="featured__step">
+              <h3 class="featured__step-title" data-i18n="featured.step2_title">Selección de componentes</h3>
+              <p class="featured__step-text" data-i18n="featured.step2_text">Cada pieza elegida con su datasheet: transceptor CAN de 3,3 V que evita desplazadores de nivel, LDO con Power Good, Flash SST25VF040B y bornas de tornillo para las entradas analógicas.</p>
+            </li>
+            <li class="featured__step">
+              <h3 class="featured__step-title" data-i18n="featured.step3_title">Acondicionamiento analógico y ESD</h3>
+              <p class="featured__step-text" data-i18n="featured.step3_text">Dos entradas de 0–10 V adaptadas al ADC y protección ESD en todas las E/S expuestas, con diodo TVS junto al conector y, en las líneas de uso general, resistencia serie antes del pin del micro.</p>
+            </li>
+            <li class="featured__step">
+              <h3 class="featured__step-title" data-i18n="featured.step4_title">Stack-up e impedancias</h3>
+              <p class="featured__step-text" data-i18n="featured.step4_text">4 capas (1,54 mm) con plano de masa y plano de alimentación; geometría de cada par calculada con SIMBEOR en el Layer Stack Manager de Altium.</p>
+            </li>
+            <li class="featured__step">
+              <h3 class="featured__step-title" data-i18n="featured.step5_title">Emplazado y ruteado</h3>
+              <p class="featured__step-text" data-i18n="featured.step5_text">Bloques funcionales separados: micro en el centro, zona analógica aislada, Ethernet junto al RJ45 y sin cobre bajo sus magnéticos, alimentación en una esquina.</p>
+            </li>
+            <li class="featured__step">
+              <h3 class="featured__step-title" data-i18n="featured.step6_title">Integridad de señal y fabricación</h3>
+              <p class="featured__step-text" data-i18n="featured.step6_text">Simulación de reflexiones post-layout, reglas DRC según la Clase 6 del fabricante Lab Circuits y salida de Gerbers, BOM, Pick &amp; Place e informe técnico en LaTeX.</p>
+            </li>
+          </ol>
+
+          <div class="featured__viewer reveal">
+            <div class="featured__tabs" role="tablist" hidden aria-label="Vistas del diseño" data-i18n-attr="aria-label:featured.tabs_label">
+              <button class="featured__tab" type="button" role="tab" id="featured-tab-render" aria-controls="featured-panel-render" aria-selected="true" tabindex="0" data-i18n="featured.tab_render">Render 3D</button>
+              <button class="featured__tab" type="button" role="tab" id="featured-tab-stackup" aria-controls="featured-panel-stackup" aria-selected="false" tabindex="-1" data-i18n="featured.tab_stackup">Stack-up</button>
+              <button class="featured__tab" type="button" role="tab" id="featured-tab-adc" aria-controls="featured-panel-adc" aria-selected="false" tabindex="-1" data-i18n="featured.tab_adc">Acondicionamiento ADC</button>
+              <button class="featured__tab" type="button" role="tab" id="featured-tab-can" aria-controls="featured-panel-can" aria-selected="false" tabindex="-1" data-i18n="featured.tab_can">CAN y protección</button>
+              <button class="featured__tab" type="button" role="tab" id="featured-tab-power" aria-controls="featured-panel-power" aria-selected="false" tabindex="-1" data-i18n="featured.tab_power">Alimentación</button>
+            </div>
+
+            <div class="featured__panel" id="featured-panel-render">
+              <figure class="featured__figure">
+                <div class="featured__frame featured__frame--light">
+                  <img src="assets/img/stm32/render-3d-top.webp" width="1400" height="990" loading="lazy" decoding="async"
+                    alt="Render 3D de la cara superior de la placa: STM32F746ZG en el centro, bloque Ethernet con RJ45 arriba a la derecha, dos módulos CAN a la derecha, bornas analógicas arriba, conector de expansión a la izquierda y USB abajo a la izquierda"
+                    data-i18n-attr="alt:featured.render_alt">
+                </div>
+                <figcaption class="featured__caption" data-i18n="featured.render_caption">Render 3D de la cara superior en Altium Designer.</figcaption>
+              </figure>
+              <p class="featured__panel-text" data-i18n="featured.render_text">El STM32F746ZG (LQFP144) ocupa el centro de la placa para repartir los buses de forma equilibrada. Ethernet va en la esquina superior derecha junto al RJ45, la etapa analógica y sus bornas en el borde superior, los dos transceptores CAN en el lateral derecho y la alimentación con el Micro-USB en la esquina inferior izquierda, lejos de la zona analógica. La Flash SPI queda justo encima del micro para que el bus SPI2 mida menos de 15 mm.</p>
+            </div>
+
+            <div class="featured__panel" id="featured-panel-stackup">
+              <figure class="featured__figure">
+                <div class="featured__frame">
+                  <img src="assets/img/stm32/stackup.webp" width="1400" height="719" loading="lazy" decoding="async"
+                    alt="Captura del Layer Stack Manager de Altium con las 4 capas de cobre (Top, Int1 GND, Int2 PWR, Bottom), los prepregs PP-004 y PP-006, el núcleo de 1,1 mm, la máscara de soldadura y el acabado en oro"
+                    data-i18n-attr="alt:featured.stackup_alt">
+                </div>
+                <figcaption class="featured__caption" data-i18n="featured.stackup_caption">Stack-up de 4 capas y 1,54 mm en el Layer Stack Manager de Altium.</figcaption>
+              </figure>
+              <p class="featured__panel-text" data-i18n="featured.stackup_text">Top y Bottom llevan las señales, Int1 es un plano de masa continuo e Int2 un plano de alimentación partido (3,3 V digital y 3,3 V analógico). El dieléctrico fino (unos 0,137 mm, dos hojas de prepreg) entre cada capa exterior y su plano permite alcanzar las impedancias con pistas fabricables en Clase 6: CAN 119,97 Ω (objetivo 120 Ω), Ethernet MDI 99,99 Ω (100 Ω) y USB 94,91 Ω (90 Ω).</p>
+            </div>
+
+            <div class="featured__panel" id="featured-panel-adc">
+              <figure class="featured__figure">
+                <div class="featured__frame featured__frame--light">
+                  <img src="assets/img/stm32/adc-acondicionamiento.webp" width="1102" height="598" loading="lazy" decoding="async"
+                    alt="Esquemático de un canal analógico: divisor de 22 kΩ y 10 kΩ, filtro RC de 1 kΩ y 100 nF con frecuencia de corte de 1,6 kHz y amplificador OPA350 como seguidor de tensión"
+                    data-i18n-attr="alt:featured.adc_alt">
+                </div>
+                <figcaption class="featured__caption" data-i18n="featured.adc_caption">Esquemático de un canal de acondicionamiento para el ADC.</figcaption>
+              </figure>
+              <p class="featured__panel-text" data-i18n="featured.adc_text">Dos canales de 0–10 V para sensores industriales. El divisor 22 kΩ/10 kΩ lleva los 10 V a 3,125 V, aprovechando el 95 % del rango del ADC; el filtro antialiasing RC (1 kΩ y 100 nF) corta en fc ≈ 1,6 kHz, y el OPA350 en seguidor de tensión evita que el muestreo del ADC cargue el filtro.</p>
+            </div>
+
+            <div class="featured__panel" id="featured-panel-can">
+              <figure class="featured__figure">
+                <div class="featured__frame featured__frame--light">
+                  <img src="assets/img/stm32/can-transceptor.webp" width="1400" height="804" loading="lazy" decoding="async"
+                    alt="Esquemático del transceptor SN65HVD230Q con terminación dividida de dos resistencias de 60 Ω y un condensador de 4,7 nF a masa, y resistencia de 0 Ω en el pin RS"
+                    data-i18n-attr="alt:featured.can_alt">
+                </div>
+                <figcaption class="featured__caption" data-i18n="featured.can_caption">Transceptor CAN con terminación dividida.</figcaption>
+              </figure>
+              <p class="featured__panel-text" data-i18n="featured.can_text">Dos nodos CAN con el SN65HVD230Q, que funciona a 3,3 V sin desplazadores de nivel. La terminación dividida fija (2 × 60 Ω con 4,7 nF a masa) filtra el ruido de modo común, y el pin RS va a masa con 0 Ω: se puede cambiar por 10–100 kΩ para limitar la pendiente si los ensayos de EMC lo piden. Protección ESD con PESD2CANFD24V junto al conector; en el resto de E/S, USBLC6-4SC6 (USB y Ethernet) y ESDA6V1BC6 (expansión), este último seguido de resistencias serie de 100 Ω.</p>
+            </div>
+
+            <div class="featured__panel" id="featured-panel-power">
+              <figure class="featured__figure">
+                <div class="featured__frame featured__frame--light">
+                  <img src="assets/img/stm32/alimentacion-ldo.webp" width="1388" height="596" loading="lazy" decoding="async"
+                    alt="Esquemático de la entrada de alimentación: regulador LDO LD39050PU33R de 5 V a 3,3 V con condensadores de 1 µF y 100 nF a la entrada y a la salida y LED indicador"
+                    data-i18n-attr="alt:featured.power_alt">
+                </div>
+                <figcaption class="featured__caption" data-i18n="featured.power_caption">Regulador LDO de 3,3 V alimentado desde el USB.</figcaption>
+              </figure>
+              <p class="featured__panel-text" data-i18n="featured.power_text">La placa se alimenta a 5 V por el Micro-USB, con fusible rearmable de 0,5 A y diodo Schottky contra corrientes inversas. Un LDO LD39050 de 3,3 V y 500 mA, con salida Power Good, alimenta el sistema; cada uno de los 12 pines VDD del micro tiene su condensador de 100 nF al lado, y una ferrita BLM18PG121SN1D separa VDDA/VREF+ del ruido digital.</p>
+            </div>
+          </div>
+
+          <div class="featured__footer reveal">
+            <div class="featured__stack">
+              <p class="featured__stack-label" data-i18n="featured.stack_label">Tecnologías:</p>
+              <ul class="chip-list" role="list">
+                <li class="chip chip--accent">Altium Designer</li>
+                <li class="chip">STM32F746ZG (Cortex-M7)</li>
+                <li class="chip">Ethernet RMII (LAN8742A)</li>
+                <li class="chip">CAN</li>
+                <li class="chip">USB 2.0 FS</li>
+                <li class="chip">SPI NOR Flash</li>
+                <li class="chip">SWD</li>
+                <li class="chip">SIMBEOR</li>
+                <li class="chip">LaTeX</li>
+              </ul>
+            </div>
+            <a class="btn btn--ghost featured__repo" href="https://github.com/JoanSanbartolome/Proyecto_DCI" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="m8 7-5 5 5 5M16 7l5 5-5 5" />
+              </svg>
+              <span data-i18n="featured.repo">Ver repositorio en GitHub</span>
+              <span class="visually-hidden" data-i18n="featured.new_tab">(se abre en una pestaña nueva)</span>
+            </a>
+          </div>
+
+        </div>
       </div>
+    </section>
+    <section id="projects" class="section" aria-labelledby="projects-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-tag" data-i18n="projects.tag">Más proyectos</p>
+          <h2 class="section-title" id="projects-title" data-i18n="projects.title">Otros proyectos de ingeniería</h2>
+        </header>
 
-      <!-- Tarjeta de Contacto Profesional -->
-      <div
-        class="bg-brand-cardDark border border-brand-borderDark p-8 card-glow max-w-2xl mx-auto text-center space-y-6">
-        <h3 class="text-2xl font-bold text-zinc-100">¿Tienes un reto de ingeniería?</h3>
-        <p class="text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto leading-relaxed font-sans">
-          Estoy disponible para incorporación laboral y colaboraciones técnicas en desarrollo de arquitectura digital
-          RTL, prototipado FPGA, diseño de tarjetas PCB y programación de sistemas embebidos.
-        </p>
+        <div class="projects__grid">
+          <!-- 1 · FIFO síncrona (destacada: ocupa 2 columnas desde 720 px) -->
+          <article class="card reveal projects__card projects__card--wide">
+            <div class="projects__media projects__media--diagram projects__media--fifo">
+              <svg class="projects__svg" viewBox="0 0 360 296" role="img"
+                aria-label="Esquema del banco de pruebas: generador aleatorio restringido, driver, FIFO bajo prueba, monitor, scoreboard con modelo de referencia y covergroups que guían la generación de estímulos."
+                data-i18n-attr="aria-label:projects.fifo.alt">
+                <defs>
+                  <marker id="projects-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path class="projects__svg-head" d="M0 0 L10 5 L0 10 z" />
+                  </marker>
+                </defs>
+                <!-- Fila 1: generador → driver -->
+                <rect class="projects__svg-box" x="4" y="8" width="160" height="64" rx="10" />
+                <text class="projects__svg-label" x="84" y="35" text-anchor="middle" data-i18n="projects.fifo.svgGen">Generador</text>
+                <text class="projects__svg-sub" x="84" y="57" text-anchor="middle" data-i18n="projects.fifo.svgGenSub">aleat. restringido</text>
 
-        <!-- Botón interactivo de email con copiado al portapapeles -->
-        <div class="pt-2 flex flex-col items-center gap-4">
-          <div class="relative group">
-            <button id="copy-email-btn" data-email="josanbart@gmail.com"
-              class="px-6 py-3.5 bg-zinc-900 border border-brand-borderDark hover:border-brand-accent text-zinc-200 hover:text-cyan-400 font-mono text-xs transition-all flex items-center gap-3 mx-auto shadow-md">
-              <svg class="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                <rect class="projects__svg-box" x="196" y="8" width="160" height="64" rx="10" />
+                <text class="projects__svg-label" x="276" y="46" text-anchor="middle">Driver</text>
+
+                <!-- Fila 2: covergroups · FIFO bajo prueba -->
+                <rect class="projects__svg-box" x="4" y="116" width="160" height="64" rx="10" />
+                <text class="projects__svg-label" x="84" y="143" text-anchor="middle">Covergroups</text>
+                <text class="projects__svg-sub projects__svg-sub--accent" x="84" y="165" text-anchor="middle">100 % · 141/141</text>
+
+                <rect class="projects__svg-box projects__svg-box--accent" x="196" y="104" width="160" height="88" rx="12" />
+                <text class="projects__svg-label projects__svg-label--accent" x="276" y="128" text-anchor="middle" data-i18n="projects.fifo.svgDut">FIFO (DUT)</text>
+                <rect class="projects__svg-slot projects__svg-slot--full" x="218" y="138" width="17" height="26" rx="3" />
+                <rect class="projects__svg-slot projects__svg-slot--full" x="238" y="138" width="17" height="26" rx="3" />
+                <rect class="projects__svg-slot projects__svg-slot--full" x="258" y="138" width="17" height="26" rx="3" />
+                <rect class="projects__svg-slot projects__svg-slot--full" x="278" y="138" width="17" height="26" rx="3" />
+                <rect class="projects__svg-slot" x="298" y="138" width="17" height="26" rx="3" />
+                <rect class="projects__svg-slot" x="318" y="138" width="17" height="26" rx="3" />
+                <text class="projects__svg-sub" x="276" y="183" text-anchor="middle" data-i18n="projects.fifo.svgRam">RAM 2 puertos</text>
+
+                <!-- Fila 3: scoreboard ← monitor -->
+                <rect class="projects__svg-box" x="4" y="224" width="160" height="64" rx="10" />
+                <text class="projects__svg-label" x="84" y="251" text-anchor="middle">Scoreboard</text>
+                <text class="projects__svg-sub" x="84" y="273" text-anchor="middle" data-i18n="projects.fifo.svgRef">modelo ref.</text>
+
+                <rect class="projects__svg-box" x="196" y="224" width="160" height="64" rx="10" />
+                <text class="projects__svg-label" x="276" y="262" text-anchor="middle">Monitor</text>
+
+                <!-- Flechas -->
+                <path class="projects__svg-wire" d="M164 40 H194" marker-end="url(#projects-arrow)" />
+                <path class="projects__svg-wire" d="M276 72 V102" marker-end="url(#projects-arrow)" />
+                <path class="projects__svg-wire" d="M276 192 V222" marker-end="url(#projects-arrow)" />
+                <path class="projects__svg-wire" d="M196 268 H166" marker-end="url(#projects-arrow)" />
+                <path class="projects__svg-wire" d="M196 240 H180 V148 H166" marker-end="url(#projects-arrow)" />
+                <!-- Realimentación: la cobertura guía al generador -->
+                <path class="projects__svg-wire projects__svg-wire--dashed" d="M84 116 V74" marker-end="url(#projects-arrow)" />
+                <text class="projects__svg-sub projects__svg-sub--accent" x="94" y="99" data-i18n="projects.fifo.svgSteer">guía</text>
               </svg>
-              <span id="email-text" class="font-bold tracking-wider">josanbart@gmail.com</span>
-              <svg class="w-4 h-4 text-zinc-500 group-hover:text-brand-accent" fill="none" stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                  d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+              <div class="projects__cov">
+                <p class="eyebrow projects__cov-title" data-i18n="projects.fifo.covTitle">Ciclos simulados y cobertura alcanzada</p>
+                <ul class="projects__cov-list" role="list">
+                  <li class="projects__cov-row">
+                    <span class="projects__cov-name" data-i18n="projects.fifo.covDriven">Dirigida por cobertura</span>
+                    <span class="projects__cov-value" data-i18n="projects.fifo.covDrivenValue">2.550 ciclos · 100 %</span>
+                    <span class="projects__cov-track" aria-hidden="true"><span class="projects__cov-bar projects__cov-bar--driven"></span></span>
+                  </li>
+                  <li class="projects__cov-row">
+                    <span class="projects__cov-name" data-i18n="projects.fifo.covFixed">Duración fija</span>
+                    <span class="projects__cov-value" data-i18n="projects.fifo.covFixedValue">10.000 ciclos · 99,79 %</span>
+                    <span class="projects__cov-track" aria-hidden="true"><span class="projects__cov-bar projects__cov-bar--fixed"></span></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="projects__body">
+              <p class="date-badge">
+                <time datetime="2026-09" data-i18n="projects.date.2026-09">sep 2026</time> – <time datetime="2026-10" data-i18n="projects.date.2026-10">oct 2026</time>
+              </p>
+              <h3 class="card__title" data-i18n="projects.fifo.title">FIFO síncrona: diseño RTL y verificación con estímulos aleatorios restringidos</h3>
+              <p class="card__text" data-i18n-html="projects.fifo.text">En equipo de 2: FIFO parametrizable en RTL sobre RAM de doble puerto y banco de pruebas orientado a objetos con driver, monitor, scoreboard con modelo de referencia y covergroups. El test dirigido por cobertura, con estímulos aleatorios restringidos, alcanza el <strong>100 % de cobertura funcional (141/141 bins) en 2.550 ciclos</strong>, frente al 99,79 % de un test de duración fija de 10.000 ciclos, sin discrepancias. Regresión automatizada en Tcl (6/6 configuraciones) e inyección de 3 tipos de fallo con bind y force/release.</p>
+              <ul class="chip-list projects__chips" role="list" aria-label="Tecnologías" data-i18n-attr="aria-label:projects.chipsLabel">
+                <li class="chip chip--accent" data-i18n="projects.fifo.chipSv">SystemVerilog (POO)</li>
+                <li class="chip">QuestaSim</li>
+                <li class="chip">Tcl</li>
+                <li class="chip">Git</li>
+              </ul>
+              <a class="link-arrow projects__link" href="https://github.com/JoanSanbartolome/SV-Verificacion-FIFO" target="_blank" rel="noopener noreferrer">
+                <span data-i18n="projects.github">Código en GitHub</span>
+                <span class="visually-hidden" data-i18n="projects.new_tab">(se abre en una pestaña nueva)</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 2 · Filtro crossover IIR -->
+          <article class="card reveal projects__card">
+            <div class="projects__media projects__media--paper">
+              <img src="assets/img/projects/crossover-response.webp" width="1000" height="667" loading="lazy" decoding="async"
+                alt="Respuesta en frecuencia del crossover: curvas teóricas Linkwitz-Riley frente a la simulación RTL y la captura por UART, con el corte en 2 kHz."
+                data-i18n-attr="alt:projects.crossover.alt">
+            </div>
+            <div class="projects__body">
+              <p class="date-badge">
+                <time datetime="2026-02" data-i18n="projects.date.2026-02">feb 2026</time> – <time datetime="2026-06" data-i18n="projects.date.2026-06">jun 2026</time>
+              </p>
+              <h3 class="card__title" data-i18n="projects.crossover.title">Filtro crossover IIR (Linkwitz-Riley LR4) en FPGA</h3>
+              <p class="card__text" data-i18n-html="projects.crossover.text">Crossover de audio en tiempo real a 48 kHz/24 bits en punto fijo Q4.36, con acumuladores de 72 bits y UART propia en RTL a 921.600 bps. Verificado <strong>bit a bit contra un golden model en Python</strong>; ocupa el 12 % de los registros y el 8,7 % de las LUT.</p>
+              <ul class="chip-list projects__chips" role="list" aria-label="Tecnologías" data-i18n-attr="aria-label:projects.chipsLabel">
+                <li class="chip chip--accent">SystemVerilog</li>
+                <li class="chip">Gowin GW1NR-9C</li>
+                <li class="chip">Tang Nano 9K</li>
+                <li class="chip">Python</li>
+              </ul>
+              <a class="link-arrow projects__link" href="https://github.com/JoanSanbartolome/Crossover_Filter_IIR_FPGA" target="_blank" rel="noopener noreferrer">
+                <span data-i18n="projects.github">Código en GitHub</span>
+                <span class="visually-hidden" data-i18n="projects.new_tab">(se abre en una pestaña nueva)</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 3 · Osciloscopio digital -->
+          <article class="card reveal projects__card">
+            <div class="projects__media projects__media--screen">
+              <img src="assets/img/projects/oscilloscope-frame.webp" width="832" height="552" loading="lazy" decoding="async"
+                alt="Fotograma de vídeo del osciloscopio reconstruido a partir de la simulación: dos señales senoidales en pantalla."
+                data-i18n-attr="alt:projects.scope.alt">
+            </div>
+            <div class="projects__body">
+              <p class="date-badge">
+                <time datetime="2026-02" data-i18n="projects.date.2026-02">feb 2026</time> – <time datetime="2026-06" data-i18n="projects.date.2026-06">jun 2026</time>
+              </p>
+              <h3 class="card__title" data-i18n="projects.scope.title">Osciloscopio digital con adquisición en tiempo real</h3>
+              <p class="card__text" data-i18n-html="projects.scope.text">Proyecto en equipo de 5 sobre la placa DE2-115. Diseñé la ruta de adquisición y la lógica de trigger: <strong>captura continua hasta 60 MHz sin pérdida de muestras</strong> mediante un buffer circular RAM/FIFO.</p>
+              <ul class="chip-list projects__chips" role="list" aria-label="Tecnologías" data-i18n-attr="aria-label:projects.chipsLabel">
+                <li class="chip chip--accent">SystemVerilog</li>
+                <li class="chip">Intel Cyclone IV</li>
+                <li class="chip">DE2-115</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 4 · Co-diseño SoC Nios II -->
+          <article class="card reveal projects__card">
+            <div class="projects__media projects__media--diagram">
+              <svg class="projects__svg" viewBox="0 0 360 240" role="img"
+                aria-label="Esquema del sistema: procesador Nios II con RTOS y tareas en C, conectado por el bus Avalon a periféricos propios en Verilog."
+                data-i18n-attr="aria-label:projects.soc.alt">
+                <rect class="projects__svg-frame" x="4" y="4" width="352" height="232" rx="12" />
+                <text class="projects__svg-sub" x="16" y="25">Platform Designer</text>
+
+                <!-- Procesador con RTOS y n tareas -->
+                <rect class="projects__svg-box projects__svg-box--accent" x="16" y="34" width="328" height="70" rx="10" />
+                <text class="projects__svg-title" x="30" y="70">Nios II</text>
+                <text class="projects__svg-sub" x="30" y="92">soft-core</text>
+                <text class="projects__svg-sub" x="164" y="55">RTOS</text>
+                <rect class="projects__svg-slot projects__svg-slot--full" x="164" y="62" width="38" height="28" rx="5" />
+                <rect class="projects__svg-slot projects__svg-slot--full" x="208" y="62" width="38" height="28" rx="5" />
+                <rect class="projects__svg-slot projects__svg-slot--more" x="252" y="62" width="38" height="28" rx="5" />
+                <rect class="projects__svg-slot projects__svg-slot--full" x="296" y="62" width="38" height="28" rx="5" />
+                <text class="projects__svg-label" x="183" y="82" text-anchor="middle">T1</text>
+                <text class="projects__svg-label" x="227" y="82" text-anchor="middle">T2</text>
+                <text class="projects__svg-label" x="271" y="82" text-anchor="middle">…</text>
+                <text class="projects__svg-label" x="315" y="82" text-anchor="middle">Tn</text>
+
+                <!-- Bus Avalon -->
+                <path class="projects__svg-wire" d="M80 104 V136" />
+                <text class="projects__svg-sub" x="344" y="128" text-anchor="end" data-i18n="projects.soc.svgBus">Bus Avalon</text>
+                <rect class="projects__svg-bus" x="16" y="136" width="328" height="12" rx="6" />
+
+                <!-- Periféricos propios: P1, P2, …, Pn -->
+                <path class="projects__svg-wire" d="M53 148 V164" />
+                <path class="projects__svg-wire" d="M137 148 V164" />
+                <path class="projects__svg-wire projects__svg-wire--dashed" d="M221 148 V164" />
+                <path class="projects__svg-wire" d="M305 148 V164" />
+                <rect class="projects__svg-box" x="16" y="164" width="74" height="40" rx="8" />
+                <rect class="projects__svg-box" x="100" y="164" width="74" height="40" rx="8" />
+                <rect class="projects__svg-frame" x="184" y="164" width="74" height="40" rx="8" />
+                <rect class="projects__svg-box" x="268" y="164" width="74" height="40" rx="8" />
+                <text class="projects__svg-label" x="53" y="190" text-anchor="middle">P1</text>
+                <text class="projects__svg-label" x="137" y="190" text-anchor="middle">P2</text>
+                <text class="projects__svg-label" x="221" y="190" text-anchor="middle">…</text>
+                <text class="projects__svg-label" x="305" y="190" text-anchor="middle">Pn</text>
+                <text class="projects__svg-sub" x="180" y="225" text-anchor="middle" data-i18n="projects.soc.svgPeriph">Periféricos propios en Verilog</text>
               </svg>
+            </div>
+            <div class="projects__body">
+              <p class="date-badge">
+                <time datetime="2026-02" data-i18n="projects.date.2026-02">feb 2026</time> – <time datetime="2026-06" data-i18n="projects.date.2026-06">jun 2026</time>
+              </p>
+              <h3 class="card__title" data-i18n="projects.soc.title">Co-diseño SoC: Nios II con RTOS y periféricos propios</h3>
+              <p class="card__text" data-i18n-html="projects.soc.text">Integración del soft-core Nios II en Platform Designer y de <strong>periféricos propios en Verilog sobre el bus Avalon</strong>. Firmware multitarea en C sobre un sistema operativo en tiempo real (RTOS).</p>
+              <ul class="chip-list projects__chips" role="list" aria-label="Tecnologías" data-i18n-attr="aria-label:projects.chipsLabel">
+                <li class="chip chip--accent">Verilog</li>
+                <li class="chip">Quartus</li>
+                <li class="chip">Platform Designer</li>
+                <li class="chip">C</li>
+                <li class="chip">RTOS</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 5 · TFG: controlador de riego -->
+          <article class="card reveal projects__card">
+            <div class="projects__media">
+              <img src="assets/img/projects/irrigation-pcb.webp" width="1000" height="655" loading="lazy" decoding="async"
+                alt="Render 3D en KiCad de la PCB del controlador de riego: módulo ESP32-S2, cuatro relés con borneros y etapa de alimentación."
+                data-i18n-attr="alt:projects.tfg.alt">
+            </div>
+            <div class="projects__body">
+              <p class="date-badge">
+                <time datetime="2025-04" data-i18n="projects.date.2025-04">abr 2025</time> – <time datetime="2026-01" data-i18n="projects.date.2026-01">ene 2026</time>
+              </p>
+              <h3 class="card__title" data-i18n="projects.tfg.title">Controlador inalámbrico de riego por goteo (TFG)</h3>
+              <p class="card__text" data-i18n-html="projects.tfg.text">PCB de 2 capas diseñada, fabricada y validada: 4 relés aislados con optoacoplador, buck de 12 a 5 V (TPS54202) y entrada de 4–20 mA con filtro RC (fc ≈ 5,9 Hz) añadido tras medir una señal ruidosa. Firmware en ESPHome con OTA e integración con Home Assistant. <strong>Nota: 8/10.</strong></p>
+              <ul class="chip-list projects__chips" role="list" aria-label="Tecnologías" data-i18n-attr="aria-label:projects.chipsLabel">
+                <li class="chip chip--accent">KiCad</li>
+                <li class="chip">ESP32-S2</li>
+                <li class="chip">ESPHome</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section id="skills" class="section" aria-labelledby="skills-title">
+          <div class="container">
+            <header class="section-head reveal">
+              <p class="section-tag" data-i18n="skills.tag">Herramientas</p>
+              <h2 class="section-title" id="skills-title" data-i18n="skills.title">Habilidades</h2>
+            </header>
+
+            <div class="grid-3 skills__grid">
+              <!-- 1. RTL y verificación -->
+              <article class="card skills__card reveal">
+                <div class="skills__head">
+                  <span class="icon-box" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                      <path d="M2 16h4V8h5v8h5V8h3" />
+                      <path d="M17 18.5l1.8 1.8L22 17" />
+                    </svg>
+                  </span>
+                  <h3 class="card__title skills__title" data-i18n="skills.rtl.title">RTL y verificación</h3>
+                </div>
+                <ul class="chip-list skills__list" role="list">
+                  <li class="chip chip--accent">Verilog</li>
+                  <li class="chip chip--accent" data-i18n="skills.rtl.sv">SystemVerilog (RTL y bancos con clases)</li>
+                  <li class="chip chip--accent" data-i18n="skills.rtl.crv">estímulos aleatorios restringidos</li>
+                  <li class="chip chip--accent" data-i18n="skills.rtl.coverage">cobertura funcional</li>
+                  <li class="chip" data-i18n="skills.rtl.refModels">modelos de referencia</li>
+                  <li class="chip" data-i18n="skills.rtl.faults">inyección de fallos</li>
+                </ul>
+              </article>
+
+              <!-- 2. Programación -->
+              <article class="card skills__card reveal">
+                <div class="skills__head">
+                  <span class="icon-box" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                      <path d="M8 7l-5 5 5 5" />
+                      <path d="M16 7l5 5-5 5" />
+                      <path d="M13.5 4.5l-3 15" />
+                    </svg>
+                  </span>
+                  <h3 class="card__title skills__title" data-i18n="skills.prog.title">Programación</h3>
+                </div>
+                <ul class="chip-list skills__list" role="list">
+                  <li class="chip">C</li>
+                  <li class="chip">C++</li>
+                  <li class="chip">Python</li>
+                  <li class="chip">Tcl</li>
+                  <li class="chip">MATLAB/Simulink</li>
+                </ul>
+              </article>
+
+              <!-- 3. EDA y FPGA -->
+              <article class="card skills__card reveal">
+                <div class="skills__head">
+                  <span class="icon-box" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                      <rect x="6" y="6" width="12" height="12" rx="1.5" />
+                      <rect x="9.5" y="9.5" width="5" height="5" rx="0.5" />
+                      <path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4" />
+                    </svg>
+                  </span>
+                  <h3 class="card__title skills__title" data-i18n="skills.eda.title">EDA y FPGA</h3>
+                </div>
+                <p class="eyebrow skills__sub" data-i18n="skills.eda.devices">Dispositivos</p>
+                <ul class="chip-list skills__list" role="list">
+                  <li class="chip">Intel Cyclone IV</li>
+                  <li class="chip">Cyclone V (SoC)</li>
+                  <li class="chip">Tang Nano 9K (Gowin GW1NR-9C)</li>
+                  <li class="chip">Nios II</li>
+                </ul>
+                <p class="eyebrow skills__sub" data-i18n="skills.eda.software">Software</p>
+                <ul class="chip-list skills__list" role="list">
+                  <li class="chip chip--accent">Intel Quartus Prime</li>
+                  <li class="chip">Gowin EDA</li>
+                  <li class="chip">ModelSim</li>
+                  <li class="chip chip--accent">QuestaSim</li>
+                  <li class="chip">Git</li>
+                </ul>
+              </article>
+
+              <!-- 4. Interfaces y buses -->
+              <article class="card skills__card reveal">
+                <div class="skills__head">
+                  <span class="icon-box" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                      <path d="M3 8h15" />
+                      <path d="M15 5l3 3-3 3" />
+                      <path d="M21 16H6" />
+                      <path d="M9 13l-3 3 3 3" />
+                    </svg>
+                  </span>
+                  <h3 class="card__title skills__title" data-i18n="skills.ifaces.title">Interfaces y buses</h3>
+                </div>
+                <p class="eyebrow skills__sub" data-i18n="skills.ifaces.rtl">En RTL</p>
+                <ul class="chip-list skills__list" role="list">
+                  <li class="chip" data-i18n="skills.ifaces.uart">UART (propia)</li>
+                  <li class="chip">Avalon</li>
+                  <li class="chip">VGA</li>
+                </ul>
+                <p class="eyebrow skills__sub" data-i18n="skills.ifaces.board">A nivel de placa</p>
+                <ul class="chip-list skills__list" role="list">
+                  <li class="chip" data-i18n="skills.ifaces.eth">Ethernet (PHY RMII)</li>
+                  <li class="chip">CAN</li>
+                  <li class="chip">USB 2.0 FS</li>
+                  <li class="chip" data-i18n="skills.ifaces.spiFlash">Flash SPI</li>
+                </ul>
+              </article>
+
+              <!-- 5. PCB y embebidos -->
+              <article class="card skills__card reveal">
+                <div class="skills__head">
+                  <span class="icon-box" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                      <rect x="3" y="3" width="18" height="18" rx="2" />
+                      <circle cx="7.5" cy="7.5" r="1.5" />
+                      <circle cx="16.5" cy="16.5" r="1.5" />
+                      <path d="M9 7.5h4.5l3 3v4.5" />
+                      <path d="M7.5 9v7.5h4" />
+                    </svg>
+                  </span>
+                  <h3 class="card__title skills__title" data-i18n="skills.pcb.title">PCB y embebidos</h3>
+                </div>
+                <ul class="chip-list skills__list" role="list">
+                  <li class="chip" data-i18n="skills.pcb.altium">Altium Designer (4 capas, impedancia controlada)</li>
+                  <li class="chip">KiCad</li>
+                  <li class="chip">STM32F746ZG</li>
+                  <li class="chip">ESP32-S2 (ESPHome)</li>
+                </ul>
+              </article>
+            </div>
+
+            <!-- Idiomas: bloque aparte -->
+            <div class="card skills__extra reveal">
+              <div class="skills__extra-head">
+                <span class="icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M3 12h18" />
+                    <path d="M12 3c2.5 2.6 3.7 5.6 3.7 9s-1.2 6.4-3.7 9c-2.5-2.6-3.7-5.6-3.7-9S9.5 5.6 12 3z" />
+                  </svg>
+                </span>
+                <h3 class="skills__extra-title" data-i18n="skills.langs.title">Idiomas</h3>
+              </div>
+              <ul class="skills__langs" role="list">
+                <li class="skills__lang"><strong data-i18n="skills.langs.es">Español</strong></li>
+                <li class="skills__lang"><strong data-i18n="skills.langs.va">Valenciano</strong></li>
+                <li class="skills__lang">
+                  <strong data-i18n="skills.langs.en">Inglés</strong>
+                  <span class="chip chip--accent">B1</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+    </section>
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="container contact__inner">
+        <header class="section-head contact__head reveal">
+          <p class="section-tag" data-i18n="contact.tag">Hablemos</p>
+          <h2 class="section-title" id="contact-title" data-i18n="contact.title">Contacto</h2>
+          <p class="section-lead" data-i18n="contact.lead">Si buscas a alguien para prácticas en diseño o verificación digital, o quieres hablar de algún proyecto, escríbeme.</p>
+        </header>
+
+        <ul class="contact__list" role="list">
+          <li class="contact__item contact__item--email reveal">
+            <a class="contact__link" href="mailto:josanbart@gmail.com">
+              <span class="icon-box icon-box--lg contact__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                  <rect x="3" y="5" width="18" height="14" rx="2"/>
+                  <path d="m3.5 6.5 8.5 6 8.5-6"/>
+                </svg>
+              </span>
+              <span class="contact__body">
+                <span class="eyebrow contact__label" data-i18n="contact.email_label">Email</span>
+                <span class="contact__value" data-contact-email>josanbart@gmail.com</span>
+              </span>
+            </a>
+            <button class="contact__copy" type="button" data-contact-copy
+              aria-label="Copiar el email al portapapeles" data-i18n-attr="aria-label:contact.copy_aria">
+              <svg class="contact__copy-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <rect x="8" y="8" width="12" height="12" rx="2"/>
+                <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>
+              </svg>
+              <span data-contact-copy-text data-i18n="contact.copy">Copiar</span>
             </button>
+          </li>
 
-            <!-- Tooltip flotante -->
-            <div id="tooltip"
-              class="absolute -top-10 left-1/2 -translate-x-1/2 bg-cyan-950 border border-brand-accent text-brand-accent font-mono text-[10px] px-3 py-1 shadow-lg opacity-0 pointer-events-none transition-all duration-300 transform translate-y-1">
-              ¡Correo copiado al portapapeles!
-            </div>
-          </div>
+          <li class="contact__item reveal">
+            <a class="contact__link" href="https://www.linkedin.com/in/joan-san-bartolome-ferri-358818252" target="_blank" rel="noopener noreferrer">
+              <span class="icon-box icon-box--lg contact__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" focusable="false">
+                  <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4V21H3V9.75Zm6.5 0h3.8v1.6h.06c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.77 2.5 4.77 5.75V21h-4v-5.1c0-1.22-.02-2.78-1.8-2.78-1.8 0-2.07 1.33-2.07 2.7V21h-4V9.75Z"/>
+                </svg>
+              </span>
+              <span class="contact__body">
+                <span class="eyebrow contact__label">LinkedIn</span>
+                <span class="contact__value">linkedin.com/in/joan-san-bartolome-ferri-358818252</span>
+              </span>
+              <span class="visually-hidden" data-i18n="contact.new_tab">(se abre en una pestaña nueva)</span>
+              <svg class="contact__arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M7 17 17 7M9 7h8v8"/>
+              </svg>
+            </a>
+          </li>
 
-          <!-- Teléfono directo -->
-          <div class="font-mono text-xs text-zinc-400 flex items-center gap-2">
-            <span class="text-zinc-500">Teléfono:</span>
-            <a href="tel:+34644388729" class="text-zinc-200 hover:text-brand-accent transition-colors font-semibold">+34
-              644 38 87 29</a>
-          </div>
+          <li class="contact__item reveal">
+            <a class="contact__link" href="https://github.com/JoanSanbartolome" target="_blank" rel="noopener noreferrer">
+              <span class="icon-box icon-box--lg contact__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" focusable="false">
+                  <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/>
+                </svg>
+              </span>
+              <span class="contact__body">
+                <span class="eyebrow contact__label">GitHub</span>
+                <span class="contact__value">github.com/JoanSanbartolome</span>
+              </span>
+              <span class="visually-hidden" data-i18n="contact.new_tab">(se abre en una pestaña nueva)</span>
+              <svg class="contact__arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M7 17 17 7M9 7h8v8"/>
+              </svg>
+            </a>
+          </li>
+
+          <li class="contact__item reveal">
+            <a class="contact__link" href="tel:+34644388729">
+              <span class="icon-box icon-box--lg contact__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                  <path d="M5 4h3.5l1.5 4.5-2 1.25a11 11 0 0 0 6.25 6.25L15.5 14l4.5 1.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1Z"/>
+                </svg>
+              </span>
+              <span class="contact__body">
+                <span class="eyebrow contact__label" data-i18n="contact.phone_label">Teléfono</span>
+                <span class="contact__value">+34&nbsp;644&nbsp;38&nbsp;87&nbsp;29</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="contact__actions reveal">
+          <a class="btn btn--primary contact__cv" href="assets/docs/Joan_San_Bartolome_Ferri_CV_ES.pdf" download
+            data-i18n-attr="href:contact.cv_href">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14"/>
+            </svg>
+            <span data-i18n="contact.cv">Descargar CV</span>
+          </a>
+          <span class="contact__cv-meta mono">PDF</span>
         </div>
 
-        <!-- Enlaces directos a redes -->
-        <div class="flex items-center justify-center gap-6 pt-4 text-xs font-mono border-t border-brand-borderDark/60">
-          <a href="https://www.linkedin.com/in/joan-san-bartolome-ferri-358818252/" target="_blank"
-            rel="noopener noreferrer"
-            class="text-zinc-400 hover:text-brand-accent transition-colors flex items-center gap-1.5 uppercase tracking-wider font-semibold">
-            LinkedIn ↗
-          </a>
-          <span class="text-zinc-700">|</span>
-          <a href="https://github.com/JoanSanbartolome" target="_blank" rel="noopener noreferrer"
-            class="text-zinc-400 hover:text-brand-accent transition-colors flex items-center gap-1.5 uppercase tracking-wider font-semibold">
-            GitHub ↗
-          </a>
-        </div>
+        <p class="visually-hidden" aria-live="polite" data-contact-status></p>
       </div>
     </section>
-
   </main>
 
-  <!-- MÓDULO 6: FOOTER (Pie de página) -->
-  <footer class="border-t border-brand-borderDark bg-brand-bgDark/60 py-8 mt-16">
-    <div
-      class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] text-zinc-500">
-      <div>
-        © 2026 Joan San Bartolome Ferri. Todos los derechos reservados.
-      </div>
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span data-year>2026</span> Joan San Bartolomé Ferri</p>
     </div>
   </footer>
-
 </body>
 
 </html>

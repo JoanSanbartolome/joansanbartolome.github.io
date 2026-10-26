@@ -1,0 +1,77 @@
+/* ==========================================================================
+   experience.css · Sección "Experiencia"
+   Rejilla de tarjetas (1 columna en móvil, 2 desde 720 px): fecha en píldora,
+   "Empresa: Puesto" en negrita, ciudad como antetítulo, descripción en gris
+   y chips al pie. Las tarjetas no son enlaces: el hover solo realza el borde.
+   ========================================================================== */
+
+.experience__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  list-style: none;
+}
+
+.experience__item {
+  display: flex;
+}
+
+.experience__card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.experience__date {
+  align-self: flex-start;
+}
+
+.experience__title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--text-main);
+}
+
+.experience__company {
+  color: var(--text-main);
+  transition: color var(--dur-fast) ease;
+}
+
+.experience__meta {
+  margin-bottom: var(--space-3);
+}
+
+.experience__text {
+  margin-bottom: var(--space-5);
+  line-height: 1.7;
+}
+
+.experience__chips {
+  margin-top: auto;
+}
+
+@media (hover: hover) {
+  .experience__card:hover {
+    border-color: var(--border-strong);
+  }
+
+  .experience__card:hover .experience__company {
+    color: var(--accent-bright);
+  }
+}
+
+@media (width >= 720px) {
+  .experience__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .experience__card {
+    padding: var(--space-6);
+  }
+
+  .experience__title {
+    font-size: var(--fs-xl);
+  }
+}

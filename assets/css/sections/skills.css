@@ -1,0 +1,115 @@
+/* ==========================================================================
+   skills.css · Sección Habilidades (#skills)
+   Tarjetas por grupo (título + chips) en rejilla 3/2/1 columnas (.grid-3)
+   y un bloque aparte de idiomas. Iconos con .icon-box y subtítulos con
+   .eyebrow (base.css). Transiciones: las de .card.reveal (hover + aparición).
+   Solo tokens de base.css.
+   ========================================================================== */
+
+/* ---------- Tarjetas de grupo ---------- */
+.skills__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Escalonado de la aparición */
+.skills__card:nth-child(2) { --reveal-delay: 0.06s; }
+.skills__card:nth-child(3) { --reveal-delay: 0.12s; }
+.skills__card:nth-child(4) { --reveal-delay: 0.18s; }
+.skills__card:nth-child(5) { --reveal-delay: 0.24s; }
+
+/* No son enlaces: solo un realce sutil del borde, sin elevación */
+@media (hover: hover) {
+  .skills__card:hover,
+  .skills__extra:hover {
+    border-color: var(--accent-line);
+  }
+}
+
+.skills__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-1);
+}
+
+.skills__title {
+  margin-bottom: 0;
+}
+
+/* Subtítulo (.eyebrow) dentro de una tarjeta: «En RTL», «Dispositivos»… */
+.skills__sub {
+  margin-top: var(--space-1);
+}
+
+.skills__sub + .skills__list {
+  margin-top: calc(-1 * var(--space-1));
+}
+
+/* ---------- Bloque aparte: idiomas ---------- */
+.skills__extra {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-6);
+  margin-top: var(--space-5);
+}
+
+.skills__extra-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.skills__extra-title {
+  font-size: var(--fs-lg);
+  line-height: 1.35;
+}
+
+.skills__langs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-5);
+  list-style: none;
+  min-width: 0;
+}
+
+.skills__lang {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-muted);
+}
+
+/* Separador «·» entre idiomas */
+.skills__lang + .skills__lang::before {
+  content: "·";
+  margin-right: var(--space-3);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+@media (width < 720px) {
+  .skills__extra {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .skills__langs {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .skills__lang + .skills__lang::before {
+    content: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills__card:nth-child(n) {
+    --reveal-delay: 0s;
+  }
+}
